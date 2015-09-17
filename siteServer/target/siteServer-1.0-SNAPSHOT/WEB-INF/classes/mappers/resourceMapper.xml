@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.sitserver.dao.ResourceDAO">
+
+    <insert id="addBean"    parameterType="com.dong.sitserver.bean.ResourceBean">
+        <selectKey resultType="String" keyProperty="id" order="AFTER">
+            select @@IDENTITY as id
+        </selectKey>
+        insert into t_resource(domain,url,type,accessState,registerState,otherState,PR,categoryId,remark) VALUES
+              (#{domain},#{url}, #{type},#{accessState}, #{registerState},#{otherState}, #{pr},#{categoryIds},#{remark})
+    </insert>
+    
+    <select id="findBean" parameterType="com.dong.sitserver.bean.ResourceBean" resultType="com.dong.sitserver.bean.ResourceBean">
+        select id,domain,url,type,accessState,registerState,otherState,PR,categoryId,remark from t_resource  where 1 = 1
+        <if test="id !=null and id!=''">
+           id = #{id}
+        </if>
+        <if test="domain !=null and domain!=''" >
+            and   domain = #{domain}
+        </if>
+        <if test="url !=null and url!=''" >
+            and   url = #{url}
+        </if>
+        <if test="type !=null and type!=''" >
+            and   type = #{type}
+        </if>
+        <if test="accessState !=null and accessState!=''">
+            and  accessState = #{accessState}
+        </if>
+        <if test="registerState !=null and registerState!=''" >
+            and   domain = #{domain}
+        </if>
+        <if test="otherState !=null and otherState!=''" >
+            and   url = #{url}
+        </if>
+        <if test="pr !=null and pr!=''" >
+            and   pr = #{pr}
+        </if>
+
+    </select>
+
+    <select id="queryBeans" parameterType="com.dong.sitserver.bean.ResourceBean" resultType="com.dong.sitserver.bean.ResourceBean">
+        select id,domain,url,type,accessState,registerState,otherState,PR,categoryId,remark from t_resource  where 1 = 1
+        <if test="id !=null and id!=''">
+            id = #{id}
+        </if>
+        <if test="domain !=null and domain!=''" >
+            and   domain = #{domain}
+        </if>
+        <if test="url !=null and url!=''" >
+            and   url = #{url}
+        </if>
+        <if test="type !=null and type!=''" >
+            and   type = #{type}
+        </if>
+        <if test="accessState !=null and accessState!=''">
+          and  accessState = #{accessState}
+        </if>
+        <if test="registerState !=null and registerState!=''" >
+            and   domain = #{domain}
+        </if>
+        <if test="otherState !=null and otherState!=''" >
+            and   url = #{url}
+        </if>
+        <if test="pr !=null and pr!=''" >
+            and   pr = #{pr}
+        </if>
+    </select>
+    
+    <update id="updateBean" parameterType="com.dong.sitserver.bean.ResourceBean">
+        update t_resource set id = id
+        <if test="domain !=null and domain!=''" >
+            ,   domain = #{domain}
+        </if>
+        <if test="url !=null and url!=''" >
+            ,   url = #{url}
+        </if>
+        <if test="type !=null and type!=''" >
+            ,   type = #{type}
+        </if>
+        <if test="accessState !=null and accessState!=''">
+           , accessState = #{accessState}
+        </if>
+        <if test="registerState !=null and registerState!=''" >
+            ,   domain = #{domain}
+        </if>
+        <if test="otherState !=null and otherState!=''" >
+            ,   url = #{url}
+        </if>
+        <if test="pr !=null and pr!=''" >
+            ,   pr = #{pr}
+        </if>
+        where id = #{id}
+
+    </update>
+
+    <delete id="deleteBean" parameterType="com.dong.sitserver.bean.ResourceBean">
+        DELETE t_resource
+        where id = #{id}
+    </delete>
+
+
+</mapper>

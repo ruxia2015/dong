@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bing-search-java-sdk">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/search-master/bing-search-java-sdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
