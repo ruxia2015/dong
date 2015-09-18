@@ -3,8 +3,6 @@ package com.dong.sitserver.controller;
 import com.dong.sitserver.bean.CategoryBean;
 import com.dong.sitserver.bean.ResourceBean;
 import com.dong.sitserver.bean.ResourceTypeBean;
-import com.dong.sitserver.common.BackJsonBean;
-import com.dong.sitserver.common.annotation.util.JacksonUtil;
 import com.dong.sitserver.common.annotation.util.StringTools;
 import com.dong.sitserver.service.CategoryService;
 import com.dong.sitserver.service.ResourceService;
@@ -12,11 +10,10 @@ import com.dong.sitserver.service.ResourceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -72,7 +69,7 @@ public class ResourceController {
     }
 
     @RequestMapping("/resource/toAdd.action")
-    public ModelAndView toAdd(HttpServletRequest req, HttpServletResponse resp)
+    public ModelAndView toAdd()
             throws Exception {
         List<ResourceTypeBean> resourceTypeBeans = resourceTypeService.queryResourceTypes(new ResourceTypeBean());
 
@@ -88,18 +85,14 @@ public class ResourceController {
     }
 
     @RequestMapping("/resource/add.action")
-    public void add(HttpServletRequest req, HttpServletResponse resp)
+    public ModelAndView add(@RequestParam("resources") String resources, @RequestParam("resourceType") String resourceType, @RequestParam("categoryIds") String categoryIds, @RequestParam("override") String override)
             throws Exception {
-        String urls = req.getParameter("urls");
-        String resourceType = req.getParameter("resourceType");
-        String categoryId = req.getParameter("categoryId");
-        String override = req.getParameter("override");
 
         String message = "";
         int addCnt = 0;
 
-        if (!StringTools.isEmptyOrNone(urls)) {
-            String[] urlArr = urls.split("\n");
+        if (!StringTools.isEmptyOrNone(resources)) {
+            String[] urlArr = resources.split("\n");
             for (String str : urlArr) {
                 if (StringTools.isEmptyOrNone(str)) {
                     continue;
@@ -121,7 +114,7 @@ public class ResourceController {
                     resourceBean.setType(resourceType);
                     resourceBean.setDomain(domain);
                     resourceBean.setUrl(str);
-                    resourceBean.setCategoryId(categoryId);
+                    resourceBean.setCategoryIds(categoryIds);
                     resourceBean.setPr("-1");
                     resourceBean.setAccessState("-1");
                     resourceBean.setRegisterState("-1");
@@ -142,62 +135,10 @@ public class ResourceController {
             message = "地址不能为空";
         }
 
-        req.setAttribute("message", message);
-        toAdd(req, resp);
+
+        return toAdd();
 
 
-    }
-
-    @RequestMapping("/resourceAjax/list.action")
-    protected String list(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
-        String domain = (String) req.getParameter("domain");
-        String type = (String) req.getParameter("type");
-
-        System.out.println("domain  " + domain);
-
-        ResourceBean bean = new ResourceBean();
-
-        bean.setDomain(domain);
-        bean.setType(type);
-        List<ResourceBean> beans = resourceService.queryResources(bean);
-
-
-        return JacksonUtil.objToJson(beans);
-    }
-
-    @RequestMapping("/resourceAjax/add.action")
-    public String addAjax(HttpServletRequest req, HttpServletResponse resp)
-            throws Exception {
-        String objJson = (req.getParameter("bean"));
-        ResourceBean resourceBean = (ResourceBean) JacksonUtil.jsonToObj(objJson,
-                ResourceBean.class);
-        resourceService.addResource(resourceBean);
-
-        return new BackJsonBean().toJson();
-
-    }
-
-    @RequestMapping("/resourceAjax/update.action")
-    public String update(HttpServletRequest req, HttpServletResponse resp)
-            throws Exception {
-        String objJson = (req.getParameter("bean"));
-        System.out.println("=========" + objJson);
-
-        ResourceBean resourceBean = (ResourceBean) JacksonUtil.jsonToObj(objJson,
-                ResourceBean.class);
-        resourceService.updateResource(resourceBean);
-        return new BackJsonBean().toJson();
-
-    }
-
-    @RequestMapping("/resourceAjax/delete.action")
-    public String delete(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String id = req.getParameter("id");
-        ResourceBean ResourceBean = new ResourceBean();
-        ResourceBean.setId(id);
-        resourceService.deleteResource(ResourceBean);
-        return new BackJsonBean().toJson();
     }
 
 

@@ -1,11 +1,14 @@
 package com.dong.sitserver.dao;
 
+import java.util.List;
 import com.dong.sitserver.bean.WebsiteBean;
-import com.dong.sitserver.common.BaseDAO;
 
-/**
- * Created by rxia on 2015/9/2.
- */
-public interface WebsiteDAO extends BaseDAO<WebsiteBean> {
-
-}
+public interface WebsiteDAO
+{
+    public int saveWebsite(WebsiteBean bean);
+    public int updateWebsite(WebsiteBean bean);
+    public int deleteWebsite(WebsiteBean bean);
+    public int countWebsite(WebsiteBean bean);
+    public List<WebsiteBean> queryWebsiteList(WebsiteBean bean);
+    public WebsiteBean  findWebsite(WebsiteBean bean);
+} 

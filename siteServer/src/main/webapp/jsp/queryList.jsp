@@ -12,15 +12,24 @@
 </head>
 <body>
 <jsp:include page="top.jsp"/>
-<div style="float:left;width:260px;">
-	<jsp:include page="left.jsp"/>
-</div>
-<div style="float:left;width:auto;border:0px solid #95B8E7;min-width:800px;">
 
-<table id="dg" class="easyui-datagrid" title="管理" style="width:900px;height:900px;">
-	</table>
+<div id="content-wrapper" class="clearfix row">
+	<div class=" twelve columns">
+		<div id="content" style="align-content: center">
 
+			<table id="dg" class="easyui-datagrid" title="管理" style="width:900px;height:500px;">
+			</table>
+
+
+		</div>
 	</div>
+</div>
+
+
+
+
+
+
 
 </body>
 </html>

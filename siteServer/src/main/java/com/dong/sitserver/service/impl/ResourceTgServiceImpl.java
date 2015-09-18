@@ -52,7 +52,7 @@ public class ResourceTgServiceImpl implements ResourceTgService {
         websiteBean = websiteService.findWebsite(websiteBean);
 
         //查询指定类别的资源
-        resourceBean.setCategoryIds(websiteBean.getCategoryIds());
+        resourceBean.setCategoryIds(websiteBean.getCategoryId());
         List<ResourceBean> resourceBeans = resourceService.queryResources(resourceBean);
 
         Map<String, ResourceTgBean> resourceMap = new HashMap<String, ResourceTgBean>();
@@ -71,7 +71,7 @@ public class ResourceTgServiceImpl implements ResourceTgService {
                 rtBean.setTgId(websiteBean.getId());
                 rtBean.setTgDomain(websiteBean.getDomain());
             }
-            rtBean.setCategory(categoryMap.get(tempR.getCategoryId()));
+            rtBean.setCategory(categoryMap.get(tempR.getCategoryIds()));
 
             //放入到集合中
             resourceMap.put(tempR.getId(), rtBean);

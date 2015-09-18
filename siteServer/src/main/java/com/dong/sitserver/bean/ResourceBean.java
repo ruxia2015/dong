@@ -29,11 +29,6 @@ public class ResourceBean extends PageBean {
 
     private String type;
 
-    /**
-     * 资源分类
-     * 如：主要用于推广什么类型的网站（齿科、车载）
-     */
-    private String categoryId;
 
     /**
      * 可以访问状态
@@ -82,13 +77,7 @@ public class ResourceBean extends PageBean {
         this.categoryIds = categoryIds;
     }
 
-    public String getCategoryId() {
-        return categoryId;
-    }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public String getPr() {
         return pr;

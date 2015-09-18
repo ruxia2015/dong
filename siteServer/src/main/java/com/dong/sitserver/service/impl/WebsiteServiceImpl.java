@@ -25,7 +25,7 @@ public class WebsiteServiceImpl implements WebsiteService {
      */
     public Integer addWebsite(WebsiteBean websiteBean) {
 
-        return websiteDAO.addBean(websiteBean);
+        return websiteDAO.saveWebsite(websiteBean);
 
     }
 
@@ -35,7 +35,7 @@ public class WebsiteServiceImpl implements WebsiteService {
      * @param websiteBean
      */
     public void updateWebsite(WebsiteBean websiteBean) {
-        websiteDAO.updateBean(websiteBean);
+        websiteDAO.updateWebsite(websiteBean);
 
     }
 
@@ -45,7 +45,7 @@ public class WebsiteServiceImpl implements WebsiteService {
      * @param websiteBean
      */
     public void deleteWebsite(WebsiteBean websiteBean) {
-        websiteDAO.deleteBean(websiteBean);
+        websiteDAO.deleteWebsite(websiteBean);
 
     }
 
@@ -56,7 +56,7 @@ public class WebsiteServiceImpl implements WebsiteService {
      * @return
      */
     public List<WebsiteBean> queryWebsites(WebsiteBean websiteBean) {
-        return websiteDAO.queryBeans(websiteBean);
+        return websiteDAO.queryWebsiteList(websiteBean);
 
     }
 
@@ -67,7 +67,7 @@ public class WebsiteServiceImpl implements WebsiteService {
      * @return
      */
     public WebsiteBean findWebsite(WebsiteBean websiteBean) {
-        return websiteDAO.findBean(websiteBean);
+        return websiteDAO.findWebsite(websiteBean);
 
     }
 }

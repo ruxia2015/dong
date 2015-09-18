@@ -9,19 +9,12 @@ public class WebsiteBean {
     private String domain;
 
 
-    private String categoryIds;
+    private String categoryId;
+    private String categoryName;
 
 
     private String remark;
 
-
-    public String getCategoryIds() {
-        return categoryIds;
-    }
-
-    public void setCategoryIds(String categoryIds) {
-        this.categoryIds = categoryIds;
-    }
 
     public String getId() {
         return id;
@@ -39,6 +32,14 @@ public class WebsiteBean {
         this.domain = domain;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -48,4 +49,11 @@ public class WebsiteBean {
     }
 
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

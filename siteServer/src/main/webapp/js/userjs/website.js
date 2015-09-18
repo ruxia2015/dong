@@ -1,5 +1,5 @@
 	var datagrid;
-	var ajaxServlet = _contextPath+"/TgAjaxServlet";
+	var ajaxServlet = _contextPath+"/websiteAjax";
 	var rowEditor=undefined;
 	$(function(){
 		datagrid=$("#dg").datagrid({
@@ -19,7 +19,7 @@
 							}
 						}},   
 						
-			              {field:'categoryIds',title:'网站类别',width:100
+			              {field:'categoryName',title:'网站类别',width:100
 							}, 
 		              {field:'remark',title:'备注',width:100,editor : {
 							type : 'validatebox'

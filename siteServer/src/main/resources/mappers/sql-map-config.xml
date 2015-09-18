@@ -8,5 +8,6 @@
 		<mapper resource="mappers/resourceMapper.xml" />
 		<mapper resource="mappers/resourceTgMapper.xml" />
 		<mapper resource="mappers/resourceTypeMapper.xml" />
+		<mapper resource="mappers/websiteMapper.xml" />
 	</mappers>
 </configuration>

@@ -19,11 +19,11 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for `t_tgwebsite`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_website`;
-CREATE TABLE `t_tgwebsite` (
+CREATE TABLE `t_website` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain` varchar(200)  DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
-  `categoryIds` varchar(100) DEFAULT NULL,
+  `remark` varchar(1024) DEFAULT NULL,
+  `categoryId` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

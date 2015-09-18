@@ -80,26 +80,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    
    </script>
-    
-  <body>  
-   	<div class="easyui-accordion" data-options="multiple:true" style="width:250px;height1:300px;">
-		<div title="设置"  style="overflow:auto;padding:10px;" >
-		<p> <a href="<%=request.getContextPath() %>/setting.jsp">配置</a></p>
-		  <p> <a href="<%=request.getContextPath() %>/resourceType/list.action">资源类型管理</a></p>
-		  <p> <a href="<%=request.getContextPath() %>/category/list.action">资源分类</a></p>
-		</div>
-		<div title="推广网站管理" style="padding:10px;">
-			<p><a href="<%=request.getContextPath() %>/resourceTg/list.action">推广网站管理</a></p>
-			<p><a href="<%=request.getContextPath() %>/resourceTg/toAdd.action">添加推广网站</a></p>
-		</div>
-		<div title="资源管理" style="padding:10px;" >
-			<p><a href="<%=request.getContextPath() %>/resource/list.action">资源管理</a></p>
-			<p><a href="<%=request.getContextPath() %>/resource/toAdd.action">添加资源</a></p>
-			<p><a href="<%=request.getContextPath() %>/searchResources.jsp">自动查找</a></p>
-		</div>
-		<div title="资源账号管理" style="padding:10px;" data-options="selected:true" id="tgs">
-		</div>
 
-	</div>
-  </body>  
 </html>  

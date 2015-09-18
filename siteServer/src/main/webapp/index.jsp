@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=GBK"
-    pageEncoding="GBK"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+         pageEncoding="GBK" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-<title>Insert title here</title>
+    <jsp:include page="jsp/common/common.jsp"/>
 </head>
 <body>
-index
+
+<jsp:include page="jsp/top.jsp"/>
+
+<div id="content-wrapper" class="clearfix row">
+    <div class=" twelve columns">
+        <div id="content" style="align-content: center">
+            <img src="images/dabai.jpg" width="700" height="auto" style="padding: 20px;margin-left: 100px;">
+        </div>
+    </div>
+</div>
+</div>
+
+
 </body>
 </html>

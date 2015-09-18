@@ -1,6 +1,6 @@
 var datagrid;
 var rowEditor = undefined;
-var ajaxServlet = _contextPath + "/ResourceTypeAjaxServlet";
+var ajaxServlet = _contextPath + "/resourceTypeAjax";
 $(function() {
 	datagrid = $("#dg").datagrid({
 		url : ajaxServlet,// 加载的URL

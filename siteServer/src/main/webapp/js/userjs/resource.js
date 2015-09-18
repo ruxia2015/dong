@@ -1,6 +1,6 @@
 	var datagrid;
 	var rowEditor=undefined;
-	var ajaxServlet = _contextPath + "/ResourceAjaxServlet";
+	var ajaxServlet = _contextPath + "/resourceAjax";
 	$(function(){
 		var stateData = [
 					      {id:"",text:"请选择"},
