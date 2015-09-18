@@ -1,0 +1,5 @@
+*.class
+/search-master/target
+/siteServer/target/classes
+/siteServer/target
+/target
