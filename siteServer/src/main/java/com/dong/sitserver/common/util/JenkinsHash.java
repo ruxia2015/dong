@@ -1,4 +1,4 @@
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 public final class JenkinsHash { // max value to limit it to 4 bytes
     private static final long MAX_VALUE = 0xFFFFFFFFL;

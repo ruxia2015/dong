@@ -1,4 +1,4 @@
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 /*import com.chong.bean.ResourceTypeBean;
 import com.chong.common.annotation.SQLAnnotation;*/

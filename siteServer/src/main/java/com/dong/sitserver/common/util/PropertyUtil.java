@@ -8,7 +8,7 @@
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 import java.io.*;
 import java.util.Properties;

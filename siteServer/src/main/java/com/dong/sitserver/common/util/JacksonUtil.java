@@ -1,4 +1,4 @@
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonFactory;

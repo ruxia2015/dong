@@ -1,4 +1,4 @@
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 import java.io.*;
 
@@ -8,7 +8,7 @@ public class FileUtil {
      * <功能详细描述>
      *
      * @param path
-     * @param fileName
+     * @param defaultFileName
      * @return File [返回类型说明]
      * @throws throws [违例类型] [违例说明]
      * @see [类、类#方法、类#成员]
@@ -32,6 +32,13 @@ public class FileUtil {
 
         File newFile = new File(path + File.separator + defaultFileName);
         return newFile;
+
+    }
+
+    public static boolean writeToFile(String path,
+                                      String content) {
+
+        return writeToFile(path,null,content);
 
     }
 

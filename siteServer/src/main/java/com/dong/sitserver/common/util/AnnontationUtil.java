@@ -1,4 +1,4 @@
-package com.dong.sitserver.common.annotation.util;
+package com.dong.sitserver.common.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

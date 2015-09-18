@@ -1,6 +1,7 @@
 package com.dong.sitserver.common;
 
-import com.dong.sitserver.common.annotation.util.JacksonUtil;
+
+import com.dong.sitserver.common.util.JacksonUtil;
 
 /**
  * Created by rxia on 2015/9/2.
