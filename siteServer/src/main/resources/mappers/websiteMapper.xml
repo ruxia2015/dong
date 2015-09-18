@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+    <mapper namespace="com.dong.sitserver.dao.WebsiteDAO" > 
+    
+     <insert id="saveWebsite" parameterType="com.dong.sitserver.bean.WebsiteBean">
+         <selectKey resultType="String" keyProperty="id" order="AFTER">
+             select @@IDENTITY as id
+         </selectKey>
+        INSERT INTO T_WEBSITE(id,domain,categoryId,remark)values(#{id},#{domain},#{categoryId},#{remark})
+     </insert> 
+     <select id="countWebsite" parameterType="com.dong.sitserver.bean.WebsiteBean"  resultType="int"> 
+        SELECT COUNT(1) FROM T_WEBSITE  WHERE 1 = 1 
+        <if test="id !=null and id !='' ">  
+            AND id = #{id}  
+        </if> 
+        <if test="domain !=null and domain !='' ">  
+            AND domain = #{domain}  
+        </if> 
+        <if test="categoryId !=null and categoryId !='' ">  
+            AND categoryId = #{categoryId}  
+        </if> 
+        <if test="remark !=null and remark !='' ">  
+            AND remark = #{remark}  
+        </if> 
+    
+     </select> 
+     <select id="queryWebsiteList" parameterType="com.dong.sitserver.bean.WebsiteBean"  resultType="com.dong.sitserver.bean.WebsiteBean">
+
+        SELECT t1.id,t1.domain,t1.categoryId,t1.remark,t2.name as categoryName FROM T_WEBSITE t1,t_category T2 WHERE T1.categoryId = T2.id
+        <if test="id !=null and id !='' ">  
+            AND t1.id = #{id}
+        </if> 
+        <if test="domain !=null and domain !='' ">  
+            AND t1.domain = #{domain}
+        </if> 
+        <if test="categoryId !=null and categoryId !='' ">  
+            AND t1.categoryId = #{categoryId}
+        </if> 
+        <if test="remark !=null and remark !='' ">  
+            AND t1.remark = #{remark}
+        </if> 
+    
+     </select> 
+     <select id="findWebsite" parameterType="com.dong.sitserver.bean.WebsiteBean"  resultType="com.dong.sitserver.bean.WebsiteBean">
+         SELECT t1.id,t1.domain,t1.categoryId,t1.remark,t2.name as categoryName FROM T_WEBSITE t1,t_category T2 WHERE T1.categoryId = T2.id
+         <if test="id !=null and id !='' ">
+             AND t1.id = #{id}
+         </if>
+         <if test="domain !=null and domain !='' ">
+             AND t1.domain = #{domain}
+         </if>
+         <if test="categoryId !=null and categoryId !='' ">
+             AND t1.categoryId = #{categoryId}
+         </if>
+         <if test="remark !=null and remark !='' ">
+             AND t1.remark = #{remark}
+         </if>
+
+     </select> 
+    <delete id="deleteWebsite" parameterType="com.dong.sitserver.bean.WebsiteBean"  > 
+        DELETE FROM  T_WEBSITE  WHERE 1 = 1 
+        <if test="id !=null and id !='' ">  
+            AND id = #{id}  
+        </if> 
+        <if test="domain !=null and domain !='' ">  
+            AND domain = #{domain}  
+        </if> 
+        <if test="categoryId !=null and categoryId !='' ">  
+            AND categoryId = #{categoryId}  
+        </if> 
+        <if test="remark !=null and remark !='' ">  
+            AND remark = #{remark}  
+        </if> 
+    
+     </delete> 
+     <update id="updateWebsite" parameterType="com.dong.sitserver.bean.WebsiteBean"  > 
+        UPDATE   T_WEBSITE  SET id = id
+        WHERE 1 = 1 
+        <if test="id !=null and id !='' ">  
+            AND id = #{id}  
+        </if> 
+        <if test="domain !=null and domain !='' ">  
+            AND domain = #{domain}  
+        </if> 
+        <if test="categoryId !=null and categoryId !='' ">  
+            AND categoryId = #{categoryId}  
+        </if> 
+        <if test="remark !=null and remark !='' ">  
+            AND remark = #{remark}  
+        </if> 
+    
+     </update> 
+    </mapper>
