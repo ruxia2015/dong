@@ -24,21 +24,33 @@
                                 <a href="#">搜索</a>
                             </li>
                             <li class="active">
-                                搜索信息
+                                搜索信息 /  ${genPath}/
                             </li>
                         </ul>
 
+
                         <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/startFetch.action">
+                            <c:if test="${not empty genPath}">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">输出文件路径</label>
+                                    <div class=" col-sm-10">
+                                            ${genPath}
+                                    </div>
+                                </div>
+                            </c:if>
                             <div class="form-group">
-                                <label for="keyword" class="col-sm-2 control-label">搜索的关键词</label>
+                                <label for="keywords" class="col-sm-2 control-label">搜索的关键词</label>
+
                                 <div class=" col-sm-10">
-                                    <input name="keyword" id="keyword"/>
+                                    <input name="keywords" id="keywords" value="${keywords}"/>
+                                    <span id="helpBlock" class="help-block"> 多个之间用逗号[,]分隔</span>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
                                 <label for="searchType" class="col-sm-2 control-label">搜索的数据类型</label>
+
                                 <div class="col-sm-10">
                                     <select id="searchType">
                                         <option type="">请选择</option>
@@ -51,13 +63,13 @@
                                 <label for="regex" class="col-sm-2 control-label">搜索数据的正则表达式</label>
 
                                 <div class=" col-sm-10">
-                                    <input name="regex" id="regex"/>
+                                    <input name="regex" id="regex" value="${regex}"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default" >开始执行</button>
+                                    <button type="submit" class="btn btn-default">开始执行</button>
                                 </div>
                             </div>
                         </form>

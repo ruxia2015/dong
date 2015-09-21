@@ -8,7 +8,7 @@ public class DataBakutil {
     //mysql 数据备份
     public static void mysqlDataBak() {
         try {
-            Properties properties = PropertyUtil.getProperties(PropertyUtil.class.getResource("/jdbcConfig.properties")
+            Properties properties = PropertyUtil_bak.getProperties(PropertyUtil_bak.class.getResource("/jdbcConfig.properties")
                     .getPath());
             String url = (String) properties.get("database.url");
             String user = (String) properties.get("database.user");

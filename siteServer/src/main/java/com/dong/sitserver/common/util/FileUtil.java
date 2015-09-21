@@ -48,6 +48,11 @@ public class FileUtil {
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
+            if(file.exists()){
+                file.createNewFile();
+            }
+
+
             byte[] con = content.getBytes();
             os.write(con);
             os.flush();

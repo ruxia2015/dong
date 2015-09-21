@@ -28,11 +28,11 @@ public class GetNamesByBeanClassTools {
             tableName = tableRule.table_name();
         }
 
-        String table_name_split = PropertiesUtil.getVaue(PropertyConstant.table_name_split);
+        String table_name_split = PropertiesUtil.getVaue(PropertyConstant.TABLE_NAME_SPLIT);
         if (StringTools.isEmptyOrNone(tableName)) {
             String className = cls.getSimpleName();
-            String tableNamePrefix = PropertiesUtil.getVaue(PropertyConstant.table_name_prefix);
-            String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.bean_suffix_name);
+            String tableNamePrefix = PropertiesUtil.getVaue(PropertyConstant.TABLE_NAME_PREFIX);
+            String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.BEAN_SUFFIX_NAME);
 
             // if(className.endsWith(beanSuffix)){
             className = className.replaceAll(beanSuffix + "$", "");
@@ -46,8 +46,8 @@ public class GetNamesByBeanClassTools {
     }
 
     public static String getMapperName(Class cls) {
-        String mpperSuffix = PropertiesUtil.getVaue(PropertyConstant.mapper_suffix_name);
-        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.bean_suffix_name);
+        String mpperSuffix = PropertiesUtil.getVaue(PropertyConstant.MAPPER_SUFFIX_NAME);
+        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.BEAN_SUFFIX_NAME);
         String beanName = cls.getSimpleName().replaceAll(beanSuffix + "$", "");
 
         String mapperName = beanName + mpperSuffix + ".xml";
@@ -66,7 +66,7 @@ public class GetNamesByBeanClassTools {
 
     public static String getDAOName(Class cls) {
         String className = cls.getSimpleName();
-        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.bean_suffix_name);
+        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.BEAN_SUFFIX_NAME);
         return className.replaceAll(beanSuffix + "$", "") + "DAO";
 
     }
@@ -80,7 +80,7 @@ public class GetNamesByBeanClassTools {
         }
 
         if (StringTools.isEmptyOrNone(packageName)) {
-            packageName = PropertiesUtil.getVaue(PropertyConstant.dao_real_packageName);
+            packageName = PropertiesUtil.getVaue(PropertyConstant.DAO_REAL_PACKAGE_NAME);
         }
 
         if (StringTools.isEmptyOrNone(packageName)) {
@@ -173,7 +173,7 @@ public class GetNamesByBeanClassTools {
     private static String getDAOMethod(Class beanCls, String methodPrefix, String methodSuffix) {
         //获取类名
         String beanName = beanCls.getSimpleName();
-        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.bean_suffix_name);
+        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.BEAN_SUFFIX_NAME);
         beanName = beanName.replaceAll(beanSuffix + "$", "");
 
         return (methodPrefix + beanName + methodSuffix);

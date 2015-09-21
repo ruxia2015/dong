@@ -23,14 +23,14 @@ import java.util.Properties;
  * @see [相关类/方法]
  * @since [产品/模块版本]
  */
-public class PropertyUtil {
+public class PropertyUtil_bak {
     //配置文件
     public File configFile;
     //配置文件的最后修改时间
     public long fileLastModify = 0L;
     private Properties props = null;
 
-    public PropertyUtil(String path) {
+    public PropertyUtil_bak(String path) {
         try {
             props = new Properties();
             configFile = new File(path);

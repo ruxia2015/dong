@@ -32,7 +32,7 @@ public class MapperFile {
 
         //获取类名
         String beanName = cls.getSimpleName();
-        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.bean_suffix_name);
+        String beanSuffix = PropertiesUtil.getVaue(PropertyConstant.BEAN_SUFFIX_NAME);
 
         // if(className.endsWith(beanSuffix)){
         beanName = beanName.replaceAll(beanSuffix + "$", "");

@@ -19,11 +19,11 @@ public class GeneratorFileByBeanMain {
 
     public static void main(String[] args) {
         //1、获取class
-        List<Class<?>> classes = classUtil.getClasses(PropertiesUtil.getVaue(PropertyConstant.beanPackage_key));
+        List<Class<?>> classes = classUtil.getClasses(PropertiesUtil.getVaue(PropertyConstant.BEAN_PACKAGE_KEY));
 
         for (Class<?> cls : classes) {
             //2.生成dao文件
-            String daoPath = PropertiesUtil.getVaue(PropertyConstant.file_path_dao);
+            String daoPath = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_DAO);
             String daoPackage = GetNamesByBeanClassTools.getDAOPackage(cls);
             String daoName = GetNamesByBeanClassTools.getDAOName(cls);
             String daoContent = DAOFile.DAOContent(cls);
@@ -31,7 +31,7 @@ public class GeneratorFileByBeanMain {
             FileUtil.writeToFile(daoPath + "/" + daoPackage.replaceAll("\\.", "\\\\"), daoName + ".java", daoContent);
 
             //3.生成mapper文件
-            String mapperPath = PropertiesUtil.getVaue(PropertyConstant.file_path_mapper);
+            String mapperPath = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_MAPPER);
             String mapperName = GetNamesByBeanClassTools.getMapperName(cls);
             String mapperContent = MapperFile.mapperContent(cls);
             FileUtil.writeToFile(mapperPath, mapperName, mapperContent);

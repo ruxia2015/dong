@@ -1,11 +1,9 @@
 package com.dong.sitserver.controller.ajax;
 
-import com.dong.sitserver.bean.CategoryBean;
 import com.dong.sitserver.bean.ResourceBean;
-import com.dong.sitserver.bean.ResourceTypeBean;
 import com.dong.sitserver.common.BackJsonBean;
-import com.dong.sitserver.common.annotation.util.JacksonUtil;
-import com.dong.sitserver.common.annotation.util.StringTools;
+import com.dong.sitserver.common.util.JacksonUtil;
+import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.service.CategoryService;
 import com.dong.sitserver.service.ResourceService;
 import com.dong.sitserver.service.ResourceTypeService;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

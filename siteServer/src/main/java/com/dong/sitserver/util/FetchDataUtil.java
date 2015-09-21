@@ -1,7 +1,8 @@
 package com.dong.sitserver.util;
 
-import org.jsoup.Jsoup;
+import com.dong.sitserver.common.util.StringTools;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,36 +14,44 @@ import java.util.regex.Pattern;
  */
 public class FetchDataUtil {
 
+    public static Set<String> getUrls(String url) {
+        Document doc = HttpUtils.accessUrl(url);
+
+        String content = doc.body().text();
+        Set<String> urls = fetchFromContent(content,PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG,PropertyConstant.REGEX_HTTP));
+        return urls;
+    }
+
     public static Set<String> fectchDataByUrl(String regex, String url) {
-
-        Set<String> datas = new HashSet<String>();
-        try {
-            Document doc = Jsoup.connect("http://www.csdn.net/").get();
-            String body = doc.body().toString();
-
-            String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
-            Pattern p = Pattern.compile(emailRegex);
-
-            Matcher m = p.matcher(body);
-
-            while (m.find()) {
-                String g = m.group();
-                datas.add(g);
-            }
-        } catch (Exception e) {
-
-           e.printStackTrace();
-        }
-        return datas;
-
+        Document doc = HttpUtils.accessUrl(url);
+        return fetchFromContent(doc.body().text(), regex);
     }
 
     public static Set<String> fetchEmail(String url) {
-        String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
+        String emailRegex = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_EMAIL);
         return fectchDataByUrl(emailRegex, url);
     }
 
-    public static void main(String[] args){
+
+    public static Set<String> fetchFromContent(String content, String regex) {
+        Set<String> datas = new HashSet<String>();
+        if (!StringTools.isEmptyOrNone(regex)) {
+            if (!regex.startsWith("/")) {
+                regex = "/" + regex + "/";
+            }
+        }
+        // String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(content);
+
+        while (m.find()) {
+            String g = m.group();
+            datas.add(g);
+        }
+        return datas;
+    }
+
+    public static void main(String[] args) {
         String url = "http://www.baidu.com/link?url=_eq9F-74v6KNEN7X4zUpA44VW3q_3maXyIOrjXjabeQzz17VWbJ016XE1PHf11IHe5GqBrimWjQJidazqSRNlK";
         fetchEmail(url);
     }

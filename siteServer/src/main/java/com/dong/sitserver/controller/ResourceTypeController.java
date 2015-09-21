@@ -2,8 +2,8 @@ package com.dong.sitserver.controller;
 
 import com.dong.sitserver.bean.ResourceTypeBean;
 import com.dong.sitserver.common.BackJsonBean;
-import com.dong.sitserver.common.annotation.util.JacksonUtil;
-import com.dong.sitserver.common.annotation.util.StringTools;
+import com.dong.sitserver.common.util.JacksonUtil;
+import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.service.ResourceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

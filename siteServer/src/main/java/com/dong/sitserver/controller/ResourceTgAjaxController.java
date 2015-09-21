@@ -2,8 +2,8 @@ package com.dong.sitserver.controller;
 
 import com.dong.sitserver.bean.ResourceBean;
 import com.dong.sitserver.bean.ResourceTgBean;
-import com.dong.sitserver.common.annotation.util.JacksonUtil;
-import com.dong.sitserver.common.annotation.util.StringTools;
+import com.dong.sitserver.common.util.JacksonUtil;
+import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.service.ResourceTgService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
