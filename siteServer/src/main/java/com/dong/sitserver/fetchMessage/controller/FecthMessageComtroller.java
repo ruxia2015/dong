@@ -24,10 +24,11 @@ public class FecthMessageComtroller {
 
     @RequestMapping("/fetch/startFetch.action")
     public ModelAndView fetch(@RequestParam(value = "keywords",defaultValue = "") String keywords,
-                              @RequestParam(value = "searchType",defaultValue ="1" ) String searchType,
+                              @RequestParam(value = "searcherType",defaultValue ="" ) String searcherType,
+                              @RequestParam(value = "dataType",defaultValue ="" ) String dataType,
                               @RequestParam(value = "regex",defaultValue = "") String regex) {
 
-        SearchRunnable searchThread = new SearchRunnable(keywords,regex);
+        SearchRunnable searchThread = new SearchRunnable(keywords,regex,searcherType);
 //        searchThread.run();
 
         Thread th = new Thread(searchThread);
@@ -35,7 +36,8 @@ public class FecthMessageComtroller {
 
         ModelAndView mv = new ModelAndView("fetch/fetchSetting");
         mv.addObject("keywords",keywords);
-        mv.addObject("searchType",searchType);
+        mv.addObject("searcherType",searcherType);
+        mv.addObject("dataType",dataType);
         mv.addObject("regex",regex);
         mv.addObject("genPath", PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.FETCH_OUTPUT_PATH));
         return mv;

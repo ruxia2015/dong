@@ -9,6 +9,18 @@
 
     <jsp:include page="../common/common.jsp"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resource.js"></script>
+
+
+    <script type="application/javascript">
+
+        $(document).ready(function () {
+            $("searcherType").val("${searcherType}");
+            $("dataType").val("${dataType}");
+        })
+
+
+    </script>
+
 </head>
 <body>
 <jsp:include page="../top.jsp"/>
@@ -24,20 +36,34 @@
                                 <a href="#">搜索</a>
                             </li>
                             <li class="active">
-                                搜索信息 /  ${genPath}/
+                                搜索信息 / ${genPath}/
                             </li>
                         </ul>
 
 
-                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/startFetch.action">
+                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/startFetch.action" method="post">
                             <c:if test="${not empty genPath}">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">输出文件路径</label>
+
                                     <div class=" col-sm-10">
                                             ${genPath}
                                     </div>
                                 </div>
                             </c:if>
+                            <div class="form-group">
+                                <label for="searcherType" class="col-sm-2 control-label">搜索引擎类型</label>
+
+                                <div class="col-sm-10">
+                                    <select id="searcherType" name="searcherType">
+                                        <option value="">请选择</option>
+                                        <option value="yahoojp" selected>雅虎日本</option>
+                                        <option value="google">谷歌</option>
+                                        <option value="baidu">百度</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="keywords" class="col-sm-2 control-label">搜索的关键词</label>
 
@@ -49,12 +75,12 @@
 
 
                             <div class="form-group">
-                                <label for="searchType" class="col-sm-2 control-label">搜索的数据类型</label>
+                                <label for="dataType" class="col-sm-2 control-label">搜索的数据类型</label>
 
                                 <div class="col-sm-10">
-                                    <select id="searchType">
-                                        <option type="">请选择</option>
-                                        <option type="email">邮箱</option>
+                                    <select id="dataType" name="dataType">
+                                        <option value="">请选择</option>
+                                        <option value="email">邮箱</option>
                                     </select>
                                 </div>
                             </div>

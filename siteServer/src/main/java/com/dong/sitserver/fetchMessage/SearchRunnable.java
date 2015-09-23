@@ -9,6 +9,8 @@ import org.apdplat.search.Searcher;
 import org.apdplat.search.baiduSearcher.impl.JSoupBaiduSearcher;
 import org.apdplat.search.bean.SearchResult;
 import org.apdplat.search.bean.Webpage;
+import org.apdplat.search.googleSearcher.impl.GoogleAjaxSearcher;
+import org.apdplat.search.yahooSearcher.impl.JsoupYahooJpSearcher;
 
 import java.util.*;
 
@@ -20,15 +22,17 @@ public class SearchRunnable implements Runnable {
     public static Set<String> emails = new HashSet<String>();
     private final String keywords;
     private String regex;
+    private String searcherType;
 
 
     public SearchRunnable(String keywords) {
         this.keywords = keywords;
     }
 
-    public SearchRunnable(String keywords, String regex) {
+    public SearchRunnable(String keywords, String regex, String searcherType) {
         this.keywords = keywords;
         this.regex = regex;
+        this.searcherType = searcherType;
     }
 
     private static Map<String, Set<String>> fetchContent(String url, String regex, Integer times) {
@@ -59,7 +63,18 @@ public class SearchRunnable implements Runnable {
     @Override
     public void run() {
         //搜索地址
-        Searcher searcher = new JSoupBaiduSearcher();
+        Searcher searcher = null;
+
+        if ("baidu".equals(searcherType)) {
+            searcher = new JSoupBaiduSearcher();
+        } else if ("yahoojp".equals(searcherType)) {
+            searcher = new JsoupYahooJpSearcher();
+        } else if ("google".equals(searcherType)) {
+            searcher = new GoogleAjaxSearcher();
+        } else {
+            return;
+        }
+
         String[] keywordArr = keywords.split(",");
         Map<String, Set<String>> result = new HashMap<String, Set<String>>();
 
