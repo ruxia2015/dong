@@ -1,5 +1,7 @@
 package org.apdplat.search.yahooSearcher.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apdplat.search.Searcher;
 import org.apdplat.search.bean.SearchResult;
 import org.apdplat.search.bean.Webpage;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
  * Created by rxia on 2015/9/23.
  */
 public class JsoupYahooJpSearcher implements YahooSearcher {
+  private   Log logger = LogFactory.getLog(getClass());
     private static final Logger LOG = LoggerFactory.getLogger(JsoupYahooJpSearcher.class);
     private String yahooUrl = "https://search.yahoo.com/search;_ylt=A2KK_KrYYgJWC08B8bObvZx4?p=emia&toggle=1&cop=mss&ei=UTF-8&fr=yfp-t-120&fp=1";
     //" https://search.yahoo.com/search?p=emia&ei=UTF-8&fr=yfp-t-120&fp=1&b=11&pz=10&bct=0&xargs=0"
@@ -69,6 +72,7 @@ public class JsoupYahooJpSearcher implements YahooSearcher {
         //百度搜索结果每页大小为10，pn参数代表的不是页数，而是返回结果的开始数
         //如获取第一页则pn=0，第二页则pn=10，第三页则pn=20，以此类推，抽象出模式：(page-1)*pageSize
         String url = "http://search.yahoo.co.jp/search?p=emia&ei=UTF-8&fr=yfp-t-120&bct=0&xargs=0&b=" + (page - 1) * pageSize + "&p=" + keyword;
+        logger.info("the request url is :" +url);
 
         SearchResult searchResult = new SearchResult();
         searchResult.setPage(page);
@@ -87,27 +91,33 @@ public class JsoupYahooJpSearcher implements YahooSearcher {
             if (total < 10) {
                 len = total;
             }
-            for (int i = 0; i < len; i++) {
-                String titleCssQuery = "div#web ol li a";
-                String summaryCssQuery = "div#web ol li div";
-                String hrefCssQuery = "div#web ol li em";
-                LOG.debug("titleCssQuery:" + titleCssQuery);
-                LOG.debug("summaryCssQuery:" + summaryCssQuery);
-                  Elements elements = document.select(titleCssQuery);
-                  System.out.print(elements.size());
-                Element titleElement = elements.get(i);
+
+            String titleCssQuery = "div#web ol li a";
+            String summaryCssQuery = "div#web ol li div";
+            String hrefCssQuery = "div#web ol li em";
+            LOG.debug("titleCssQuery:" + titleCssQuery);
+            LOG.debug("summaryCssQuery:" + summaryCssQuery);
+            Elements titleElements = document.select(titleCssQuery);
+            Elements summaryElements = document.select(summaryCssQuery);
+
+
+            for (int i = 0; i < titleElements.size(); i++) {
+
+                Element titleElement =titleElements.first();
                 String href = "";
                 String titleText = "";
                 if (titleElement != null) {
                     titleText = titleElement.text();
                     href = titleElement.attr("href");
+                    titleElements.remove(titleElement);
                 }
                 LOG.debug(titleText);
-                Element summaryElement = document.select(summaryCssQuery).get(i);
 
+                Element summaryElement = summaryElements.first();
                 String summaryText = "";
                 if (summaryElement != null) {
                     summaryText = summaryElement.text();
+                    summaryElements.remove(summaryElement);
                 }
                 LOG.debug(summaryText);
 
@@ -146,11 +156,11 @@ public class JsoupYahooJpSearcher implements YahooSearcher {
         }
         String totalText = totalElement.text();
         LOG.info("搜索结果文本：" + totalText);
-        if (totalText.indexOf("/") < 0 || totalText.indexOf("-") < 0) {
+        if (totalText.indexOf("/") <= 0 || totalText.indexOf("-",totalText.indexOf("/")) <= 0) {
             return 0;
         }
 
-        totalText = totalText.substring(totalText.indexOf("/"), totalText.indexOf("-"));
+        totalText = totalText.substring(totalText.indexOf("/"), totalText.indexOf("-",totalText.indexOf("/")));
 
         String regEx = "[^0-9]";
         Pattern pattern = Pattern.compile(regEx);

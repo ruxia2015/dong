@@ -188,6 +188,14 @@
                 <version>1.1.2</version>
             </dependency>-->
 
+            <!-- mail start-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>1.4</version>
+            </dependency>
+            <!--mail end -->
+
 
 
 

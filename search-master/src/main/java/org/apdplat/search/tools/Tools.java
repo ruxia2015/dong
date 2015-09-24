@@ -39,7 +39,7 @@ public class Tools {
     private static final Logger LOG = LoggerFactory.getLogger(Tools.class);
 
     public static String getHTMLContent(String url) {
-        return getHTMLContent(url, "utf-8");
+        return null;//getHTMLContent(url, "utf-8");
     }
 
     public static String getHTMLContent(String url, String encoding) {

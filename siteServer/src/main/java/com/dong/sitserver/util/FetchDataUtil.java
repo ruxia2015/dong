@@ -16,14 +16,21 @@ public class FetchDataUtil {
 
     public static Set<String> getUrls(String url) {
         Document doc = HttpUtils.accessUrl(url);
+        if(doc==null || doc.body()==null){
+            return new HashSet<String>();
+        }
 
         String content = doc.body().text();
+
         Set<String> urls = fetchFromContent(content,PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG,PropertyConstant.REGEX_HTTP));
         return urls;
     }
 
     public static Set<String> fectchDataByUrl(String regex, String url) {
         Document doc = HttpUtils.accessUrl(url);
+        if(doc==null || doc.body()==null){
+            return new HashSet<String>();
+        }
         return fetchFromContent(doc.body().text(), regex);
     }
 
@@ -36,9 +43,9 @@ public class FetchDataUtil {
     public static Set<String> fetchFromContent(String content, String regex) {
         Set<String> datas = new HashSet<String>();
         if (!StringTools.isEmptyOrNone(regex)) {
-            if (!regex.startsWith("/")) {
+          /*  if (!regex.startsWith("/")) {
                 regex = "/" + regex + "/";
-            }
+            }*/
         }
         // String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
         Pattern p = Pattern.compile(regex);

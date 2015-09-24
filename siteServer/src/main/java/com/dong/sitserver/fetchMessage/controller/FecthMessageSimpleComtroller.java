@@ -1,9 +1,11 @@
 package com.dong.sitserver.fetchMessage.controller;
 
 import com.dong.sitserver.common.util.StringTools;
-import com.dong.sitserver.fetchMessage.SearchRunnable;
+import com.dong.sitserver.fetchMessage.thread.FastSearchRunnable;
 import com.dong.sitserver.util.PropertiesUtil;
 import com.dong.sitserver.util.PropertyConstant;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,16 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class FecthMessageComtroller {
-
-    @RequestMapping("/fetch/toSetting.action")
+public class FecthMessageSimpleComtroller {
+    private  Log logger = LogFactory.getLog(getClass());
+    @RequestMapping("/fetch/toFetch.action")
     public ModelAndView toSetting() {
-        ModelAndView mv = new ModelAndView("fetch/fetchSetting");
+        ModelAndView mv = new ModelAndView("fetch/fastFetchSetting");
         return mv;
     }
 
 
-    @RequestMapping("/fetch/startFetch.action")
+    @RequestMapping("/fetch/fastStartFetch.action")
     public ModelAndView fetch(@RequestParam(value = "keywords", defaultValue = "") String keywords,
                               @RequestParam(value = "searcherType", defaultValue = "") String searcherType,
                               @RequestParam(value = "dataType", defaultValue = "") String dataType,
@@ -33,14 +35,19 @@ public class FecthMessageComtroller {
             regex = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_EMAIL);
         }
 
-        SearchRunnable searchThread = new SearchRunnable(keywords, regex, searcherType);
-//        searchThread.run();
+        if("all".equals(searcherType)){
+            String[] searchers = new String[]{"yahoo","yahoojp","bing","google","baidu"};
+            for(String s:searchers){
+                logger.info("启动【"+s+"】的搜索线程!");
+                new Thread(new FastSearchRunnable(keywords,regex,s)).start();
+            }
+        }else{
+            FastSearchRunnable fastSearchRunnable = new FastSearchRunnable(keywords,regex,searcherType);
+            new Thread(fastSearchRunnable).start();
+        }
 
-        Thread th = new Thread(searchThread);
-        th.run();
-        ;
 
-        ModelAndView mv = new ModelAndView("fetch/fetchSetting");
+        ModelAndView mv = new ModelAndView("fetch/fastFetchSetting");
         mv.addObject("keywords", keywords);
         mv.addObject("searcherType", searcherType);
         mv.addObject("dataType", dataType);

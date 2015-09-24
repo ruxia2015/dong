@@ -45,7 +45,16 @@
 						<li><a href="<%=request.getContextPath() %>/fetch/toSetting.action">搜索信息</a></li>
 						<li role="separator" class="divider"></li>
 						<li class="dropdown-header">信息管理</li>
-						<li><a href="<%=request.getContextPath() %>/fetch/toSetting.action">邮箱信息</a></li>
+						<li><a href="<%=request.getContextPath() %>/fetch/toFetch.action">搜索信息2</a></li>
+					</ul>
+				</li>
+
+				<li class="dropdown">
+					<a href="javascript:void(0)"   class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">服务 <span class="caret"></span></a>
+					<ul class="dropdown-menu" >
+
+						<li><a href="<%=request.getContextPath() %>/email/toSendMail.action">发送邮件</a></li>
+
 					</ul>
 				</li>
 

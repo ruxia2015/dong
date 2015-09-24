@@ -52,7 +52,7 @@ public class GoogleAjaxSearcher implements GoogleSearcher {
     }
     @Override
     public SearchResult search(String keyword, int page) {
-        int pageSize = 8;
+        int pageSize = 10;
         //谷歌搜索结果每页大小为8，start参数代表的是返回结果的开始数
         //如获取第一页则start=0，第二页则start=10，第三页则start=20，以此类推，抽象出模式：(page-1)*pageSize
         String url = "http://ajax.googleapis.com/ajax/services/search/web?start="+(page-1)*pageSize+"&rsz=large&v=1.0&q=" + keyword;

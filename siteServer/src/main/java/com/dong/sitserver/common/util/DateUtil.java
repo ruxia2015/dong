@@ -103,7 +103,7 @@ public class DateUtil {
     /**
      * 将日期/时间date转换为指定的格式dateformat
      *
-     * @param datet      Date 要转换日期
+     * @param date      Date 要转换日期
      * @param dateformat SimpleDateFormat 日期格式
      * @return String 转换后的日期/时间字符串
      */
@@ -166,8 +166,7 @@ public class DateUtil {
      * @param date String 日期字符串
      * @return String 转换后的日期字符串
      * @throws java.text.ParseException 若转换出现错误,如:格式有误或者日期时间有误
-     * @see DateTime#{@link #getDateTime(String, String)}
-     * @see DateTime#{@link #DATE_FORMAT}
+
      */
     public static String getDate(String date) throws ParseException {
         return DateUtil.getDate(date, DateUtil.DATE_FORMAT);
@@ -225,7 +224,7 @@ public class DateUtil {
     /**
      * 取当前日期时间,指定日期时间格式dateformat
      *
-     * @param datetimeformat String 日期字符串
+     * @param dateformat String 日期字符串
      * @return String 转换后的日期字符串
      */
     public static String getNowDate(String dateformat) {
@@ -335,7 +334,7 @@ public class DateUtil {
      * 得到日期date中的key数据段
      *
      * @param date
-     * @param key  参考Calendar.get()的参数
+     * @param field  参考Calendar.get()的参数
      * @return
      */
     public static int get(Date date, int field) {

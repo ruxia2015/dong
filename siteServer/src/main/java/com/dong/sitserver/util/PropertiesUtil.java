@@ -12,6 +12,12 @@ public class PropertiesUtil {
     private static Map<String, Properties> map = new HashMap<String, Properties>();
     private static Map<String, Properties> lastModifiedMap = new HashMap<String, Properties>();
 
+
+    public static String getConfigVaue( String key) {
+        return getVaue(PropertyConstant.FILE_PATH_CONFIG,key);
+
+    }
+
     public static String getVaue(String fileName, String key) {
         Properties properties = new Properties();
         InputStream in = PropertiesUtil.class.getResourceAsStream(fileName);
