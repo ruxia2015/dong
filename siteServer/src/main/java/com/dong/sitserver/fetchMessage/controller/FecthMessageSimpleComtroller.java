@@ -17,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FecthMessageSimpleComtroller {
-    private  Log logger = LogFactory.getLog(getClass());
+    private Log logger = LogFactory.getLog(getClass());
+
     @RequestMapping("/fetch/toFetch.action")
     public ModelAndView toSetting() {
         ModelAndView mv = new ModelAndView("fetch/fastFetchSetting");
@@ -35,14 +36,14 @@ public class FecthMessageSimpleComtroller {
             regex = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_EMAIL);
         }
 
-        if("all".equals(searcherType)){
-            String[] searchers = new String[]{"yahoo","yahoojp","bing","google","baidu"};
-            for(String s:searchers){
-                logger.info("启动【"+s+"】的搜索线程!");
-                new Thread(new FastSearchRunnable(keywords,regex,s)).start();
+        if ("all".equals(searcherType)) {
+            String[] searchers = new String[]{"yahoo", "yahoojp", "bing", "google", "baidu"};
+            for (String s : searchers) {
+                logger.info("启动【" + s + "】的搜索线程!");
+                new Thread(new FastSearchRunnable(keywords, regex, s)).start();
             }
-        }else{
-            FastSearchRunnable fastSearchRunnable = new FastSearchRunnable(keywords,regex,searcherType);
+        } else {
+            FastSearchRunnable fastSearchRunnable = new FastSearchRunnable(keywords, regex, searcherType);
             new Thread(fastSearchRunnable).start();
         }
 
@@ -55,5 +56,30 @@ public class FecthMessageSimpleComtroller {
         mv.addObject("genPath", PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.FETCH_OUTPUT_PATH));
         return mv;
     }
+
+
+    @RequestMapping("fetch/toFetchFromSite")
+    public ModelAndView toFetchFromSite() {
+        ModelAndView mv = new ModelAndView("fetch/fetchFromSite");
+        return mv;
+    }
+
+    @RequestMapping("fetch/fetchFromSite")
+    public ModelAndView fetchFromSite(@RequestParam(value = "site", defaultValue = "") String site, @RequestParam(value = "type",defaultValue = "") String type, @RequestParam(value = "regex",defaultValue = "") String regex) {
+        String result = "";
+
+
+        if("email".equalsIgnoreCase(type)){
+            regex = "";
+        }else if("url".equalsIgnoreCase(type)){
+            regex = "";
+        }
+
+
+        ModelAndView mv = new ModelAndView("fetch/fetchFromSite");
+        mv.addObject("result", result);
+        return mv;
+    }
+
 
 }

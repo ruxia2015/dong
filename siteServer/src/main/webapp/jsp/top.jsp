@@ -45,7 +45,9 @@
 						<li><a href="<%=request.getContextPath() %>/fetch/toSetting.action">搜索信息</a></li>
 						<li role="separator" class="divider"></li>
 						<li class="dropdown-header">信息管理</li>
-						<li><a href="<%=request.getContextPath() %>/fetch/toFetch.action">搜索信息2</a></li>
+						<li><a href="<%=request.getContextPath() %>/fetch/toFetch.action">搜索信息-简单法</a></li>
+						<li><a href="<%=request.getContextPath() %>/fetch/toFetchFromSite.action">提取页面信息</a></li>
+
 					</ul>
 				</li>
 
@@ -54,6 +56,11 @@
 					<ul class="dropdown-menu" >
 
 						<li><a href="<%=request.getContextPath() %>/email/toSendMail.action">发送邮件</a></li>
+
+						<li role="separator" class="divider"></li>
+						<li class="dropdown-header">配置管理管理</li>
+						<li><a href="<%=request.getContextPath() %>/email/setiingSendMailInfo.action">配置发送邮箱信息</a></li>
+						<li><a href="<%=request.getContextPath() %>/email/settingReceMailInfo	.action">配置收件邮箱信息</a></li>
 
 					</ul>
 				</li>

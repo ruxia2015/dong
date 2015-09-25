@@ -33,7 +33,7 @@
                     <div class="span12">
                         <ul class="breadcrumb">
                             <li>
-                                <a href="#">发送邮件</a>
+                                <a href="#">搜索(方式二)</a>
                             </li>
                             <li class="active">
                                 搜索信息 / ${genPath}/
@@ -42,13 +42,21 @@
 
 
                         <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fastStartFetch.action" method="post">
+                            <c:if test="${not empty genPath}">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">输出文件路径</label>
 
+                                    <div class=" col-sm-10">
+                                            ${genPath}
+                                    </div>
+                                </div>
+                            </c:if>
                             <div class="form-group">
                                 <label for="searcherType" class="col-sm-2 control-label">搜索引擎类型</label>
 
                                 <div class="col-sm-10">
                                     <select id="searcherType" name="searcherType">
-                                        <option value="">请选择邮箱</option>
+                                        <option value="">请选择</option>
                                         <option value="yahoojp" selected>雅虎日本</option>
                                         <option value="yahoo" selected>雅虎</option>
                                         <option value="google">谷歌</option>

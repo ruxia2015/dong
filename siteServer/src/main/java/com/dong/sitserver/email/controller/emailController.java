@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by rxia on 2015/9/24.
  */
 @Controller
-public class emailController {
+public class EmailController {
 
     @RequestMapping("email/toSendMail.action")
     public ModelAndView toSendMail(){
