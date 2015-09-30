@@ -1,9 +1,12 @@
 package com.dong.sitserver.util;
 
+import com.dong.sitserver.common.util.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -59,7 +62,21 @@ public class FetchDataUtil {
     }
 
     public static void main(String[] args) {
-        String url = "http://www.baidu.com/link?url=_eq9F-74v6KNEN7X4zUpA44VW3q_3maXyIOrjXjabeQzz17VWbJ016XE1PHf11IHe5GqBrimWjQJidazqSRNlK";
-        fetchEmail(url);
+        String url = "C:\\Users\\rxia\\Desktop\\2.txt";
+        String emailRegex = "[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+";
+        File file = new File(url);
+        String content  = FileUtil.readFile(url);
+       /* try {
+           // content = new String(content.getBytes("ISO-8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
+        System.out.print(content);
+        Set<String>  ste = fetchFromContent(content, emailRegex);
+        System.out.println("\n\n=======================================");
+        for(String str:ste){
+            System.out.println(str);
+        }
+
     }
 }

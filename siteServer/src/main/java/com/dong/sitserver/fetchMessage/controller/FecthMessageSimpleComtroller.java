@@ -1,7 +1,9 @@
 package com.dong.sitserver.fetchMessage.controller;
 
+import com.dong.sitserver.common.util.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.fetchMessage.thread.FastSearchRunnable;
+import com.dong.sitserver.util.FetchDataUtil;
 import com.dong.sitserver.util.PropertiesUtil;
 import com.dong.sitserver.util.PropertyConstant;
 import org.apache.commons.logging.Log;
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by rxia on 2015/9/15.
@@ -65,19 +70,35 @@ public class FecthMessageSimpleComtroller {
     }
 
     @RequestMapping("fetch/fetchFromSite")
-    public ModelAndView fetchFromSite(@RequestParam(value = "site", defaultValue = "") String site, @RequestParam(value = "type",defaultValue = "") String type, @RequestParam(value = "regex",defaultValue = "") String regex) {
-        String result = "";
+    public ModelAndView fetch(@RequestParam(value = "sitePages", defaultValue = "") String sitePages,
+                              @RequestParam(value ="type" ,defaultValue = "") String type,
+                              @RequestParam(value ="regex" ,defaultValue = "") String regex) {
 
-
-        if("email".equalsIgnoreCase(type)){
-            regex = "";
-        }else if("url".equalsIgnoreCase(type)){
-            regex = "";
+        if(StringTools.isEmptyOrNone(regex)){
+            regex = PropertiesUtil.getConfigVaue(PropertyConstant.REGEX_EMAIL);
         }
 
+        Set<String> emails = new HashSet<String>();
+
+        if("http".equals(type)){
+            String[] siteArr = sitePages.split("\r|\n");
+            for(String str:siteArr){
+                emails.addAll(FetchDataUtil.fectchDataByUrl(regex,str));
+            }
+        }else if("str".equals(type)){
+            emails = FetchDataUtil.fetchFromContent(sitePages,regex);
+
+        }else if("file".equals(type)){
+            String[] siteArr = sitePages.split("\r|\n");
+            for(String temp:siteArr){
+                String content = FileUtil.readFile(temp);
+                emails.addAll( FetchDataUtil.fetchFromContent(content,regex));
+            }
+        }
 
         ModelAndView mv = new ModelAndView("fetch/fetchFromSite");
-        mv.addObject("result", result);
+        mv.addObject("sitePages", sitePages);
+        mv.addObject("emails", emails);
         return mv;
     }
 

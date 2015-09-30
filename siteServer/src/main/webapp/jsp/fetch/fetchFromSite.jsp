@@ -33,67 +33,42 @@
                     <div class="span12">
                         <ul class="breadcrumb">
                             <li>
-                                <a href="#">搜索(方式二)</a>
+                                <a href="#">搜索</a>
                             </li>
                             <li class="active">
-                                搜索信息 / ${genPath}/
+                                提取邮箱信息(只支持网页)
                             </li>
                         </ul>
 
 
-                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fastStartFetch.action" method="post">
-                            <c:if test="${not empty genPath}">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">输出文件路径</label>
+                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fetchFromSite.action" method="post">
 
-                                    <div class=" col-sm-10">
-                                            ${genPath}
-                                    </div>
-                                </div>
-                            </c:if>
+
                             <div class="form-group">
-                                <label for="searcherType" class="col-sm-2 control-label">搜索引擎类型</label>
+                                <label for="type" class="col-sm-2 control-label">搜索引擎类型</label>
 
                                 <div class="col-sm-10">
-                                    <select id="searcherType" name="searcherType">
+                                    <select id="type" name="type">
                                         <option value="">请选择</option>
-                                        <option value="yahoojp" selected>雅虎日本</option>
-                                        <option value="yahoo" selected>雅虎</option>
-                                        <option value="google">谷歌</option>
-                                        <option value="bing">bing</option>
-                                        <option value="all">所有</option>
+                                        <option value="http" selected>网址</option>
+                                        <option value="str">内容</option>
+                                        <option value="file">本地文件地址</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="keywords" class="col-sm-2 control-label">搜索的关键词</label>
+                                <label for="sitePages" class="col-sm-2 control-label">页面</label>
 
                                 <div class=" col-sm-10">
-                                    <textarea name="keywords" id="keywords"  cols="60" rows="5">${keywords}</textarea>
-                                    <span id="helpBlock" class="help-block"> 多个之间用逗号[,]分隔</span>
+                                    <textarea name="sitePages" id="sitePages"  cols="60" rows="5">${sitePages}</textarea>
+                                    <span id="helpBlock" class="help-block"> 一行一个(网址/本地地址)</span>
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
-                                <label for="dataType" class="col-sm-2 control-label">搜索的数据类型</label>
 
-                                <div class="col-sm-10">
-                                    <select id="dataType" name="dataType">
-                                        <option value="">请选择</option>
-                                        <option value="email">邮箱</option>
-                                    </select>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="regex" class="col-sm-2 control-label">搜索数据的正则表达式</label>
-
-                                <div class=" col-sm-10">
-                                    <input name="regex" id="regex" value="${regex}" style="width:400px;;"/>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
@@ -101,6 +76,18 @@
                                 </div>
                             </div>
                         </form>
+
+                        <div style="padding: 10px;background: rgba(0, 136, 0, 0.19);">
+                            <h3>提取的结果：</h3>
+                            <c:if test="${  emails!=null and (emails.size() == 0) }">
+                                         没有信息
+                            </c:if>
+                            <c:forEach items="${emails}" var="email">
+                                ${email} <br/>
+                            </c:forEach>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
