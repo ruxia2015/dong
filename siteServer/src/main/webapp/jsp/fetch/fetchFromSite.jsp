@@ -8,15 +8,21 @@
     <title>资源管理</title>
 
     <jsp:include page="../common/common.jsp"/>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resource.js"></script>
 
+    <script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resource.js"></script>
 
     <script type="application/javascript">
 
         $(document).ready(function () {
-            $("searcherType").val("${searcherType}");
-            $("dataType").val("${dataType}");
-        })
+                    $("#type").val("${type}");
+                    alert("type ${type}")
+                }
+        )
+
+        function selectAll() {
+            var t = document.getElementById("resultHtml");
+            t.select();
+        }
 
 
     </script>
@@ -43,14 +49,13 @@
 
                         <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fetchFromSite.action" method="post">
 
-
                             <div class="form-group">
                                 <label for="type" class="col-sm-2 control-label">搜索引擎类型</label>
 
                                 <div class="col-sm-10">
                                     <select id="type" name="type">
                                         <option value="">请选择</option>
-                                        <option value="http" selected>网址</option>
+                                        <option value="http" selected>网址(不包含页面中的pdf等)</option>
                                         <option value="str">内容</option>
                                         <option value="file">本地文件地址</option>
                                     </select>
@@ -61,13 +66,10 @@
                                 <label for="sitePages" class="col-sm-2 control-label">页面</label>
 
                                 <div class=" col-sm-10">
-                                    <textarea name="sitePages" id="sitePages"  cols="60" rows="5">${sitePages}</textarea>
+                                    <textarea name="sitePages" id="sitePages" cols="60" rows="5">${sitePages}</textarea>
                                     <span id="helpBlock" class="help-block"> 一行一个(网址/本地地址)</span>
                                 </div>
                             </div>
-
-
-
 
 
                             <div class="form-group">
@@ -77,22 +79,27 @@
                             </div>
                         </form>
 
-                        <div style="padding: 10px;background: rgba(0, 136, 0, 0.19);">
+                        <div style="padding: 10px;padding-bottom:40px;height: 500px;">
                             <h3>提取的结果：</h3>
+                            <button onclick="selectAll();">全选</button>
                             <c:if test="${  emails!=null and (emails.size() == 0) }">
-                                         没有信息
+                                没有信息
                             </c:if>
-                            <c:forEach items="${emails}" var="email">
-                                ${email} <br/>
+                            <c:if test="${not empty emails}">
+                                一共有${emails.size()}记录。
+                            </c:if>
+                            <textarea id="resultHtml"
+                                      style="overflow-y: scroll; background:rgba(0, 136, 0, 0.19);width:90%;height: 90%;">
+                            <c:forEach items="${emails}" var="email">${email}
                             </c:forEach>
-
-
+                            </textarea>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

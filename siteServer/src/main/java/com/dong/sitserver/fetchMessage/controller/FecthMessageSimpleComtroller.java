@@ -92,12 +92,13 @@ public class FecthMessageSimpleComtroller {
             String[] siteArr = sitePages.split("\r|\n");
             for(String temp:siteArr){
                 String content = FileUtil.readFile(temp);
-                emails.addAll( FetchDataUtil.fetchFromContent(content,regex));
+                emails.addAll(FetchDataUtil.fetchFromContent(content, regex));
             }
         }
 
         ModelAndView mv = new ModelAndView("fetch/fetchFromSite");
         mv.addObject("sitePages", sitePages);
+        mv.addObject("type", type);
         mv.addObject("emails", emails);
         return mv;
     }
