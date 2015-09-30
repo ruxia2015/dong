@@ -9,15 +9,10 @@
 
     <jsp:include page="../common/common.jsp"/>
 
-    <script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resource.js"></script>
-
-    <script type="application/javascript">
-
-        $(document).ready(function () {
-                    $("#type").val("${type}");
-                    alert("type ${type}")
-                }
-        )
+    <script type="text/javascript">
+       $(document).ready(function() {
+            $("#type").val("${type}");
+        });
 
         function selectAll() {
             var t = document.getElementById("resultHtml");

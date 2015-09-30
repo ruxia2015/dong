@@ -1,6 +1,10 @@
 $(function(){
+	 var _ajaxServlet = "";
+	if(typeof("_ajaxServlet") !="undefined"){
+		_ajaxServlet = _ajaxServlet;
+	}
 		datagrid=$("#dg").datagrid({
-			url:ajaxServlet+"/list.action",//加载的URL
+			url:_ajaxServlet+"/list.action",//加载的URL
 		    isField:"id",
 			pagination:true,//显示分页
 			pageSize:10,//分页大小
@@ -48,7 +52,7 @@ $(function(){
 	        			{
 	        				
 	        				$.ajax({
-	        					url : ajaxServlet+'/delete.action',
+	        					url : _ajaxServlet+'/delete.action',
 	        					data : {"id":rows[0].id},
 	        					dataType : 'json',
 	        					success : function(r) {
@@ -111,11 +115,11 @@ $(function(){
 				var url = '';
 				var messageStart = "";
 				if (inserted.length > 0) {
-					url = ajaxServlet+'/add.action';
+					url = _ajaxServlet+'/add.action';
 					messageStart = "添加";
 				}
 				if (updated.length > 0) {
-					url = ajaxServlet+'/update.action';
+					url = _ajaxServlet+'/update.action';
 					messageStart = "修改";
 				}
 				alert(JSON.stringify(rowData));

@@ -45,6 +45,10 @@ public class FetchDataUtil {
 
     public static Set<String> fetchFromContent(String content, String regex) {
         Set<String> datas = new HashSet<String>();
+        if(StringTools.isEmptyOrNone(content)){
+            return  datas;
+        }
+
         if (!StringTools.isEmptyOrNone(regex)) {
           /*  if (!regex.startsWith("/")) {
                 regex = "/" + regex + "/";
