@@ -23,7 +23,7 @@ public class DataFetcher {
             if (document == null || document.body() == null) {
                 return null;
             }
-            String content = document.body().text();
+            String content = document.body().html();
 
             int i = 0;
             for (String regex : regexs) {

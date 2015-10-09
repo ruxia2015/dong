@@ -1,6 +1,7 @@
 package com.dong.sitserver.util;
 
 
+import com.dong.sitserver.common.ServiceException;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -9,6 +10,8 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -20,7 +23,7 @@ import java.util.Set;
 
 
 public class HttpUtils {
-
+    private static Log logger = LogFactory.getLog(HttpUtils.class);
     public static Document accessUrl(String url) {
         return accessUrl(url, "utf-8");
     }
@@ -74,8 +77,9 @@ public class HttpUtils {
 
 
         } catch (Exception e) {
+            logger.error("访问出错",e);
+           throw new ServiceException("访问出错",e);
 
-            e.printStackTrace();
         }
         return doc;
 

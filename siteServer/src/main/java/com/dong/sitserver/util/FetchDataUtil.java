@@ -23,7 +23,7 @@ public class FetchDataUtil {
             return new HashSet<String>();
         }
 
-        String content = doc.body().text();
+        String content = doc.body().html();
 
         Set<String> urls = fetchFromContent(content,PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG,PropertyConstant.REGEX_HTTP));
         return urls;
@@ -34,7 +34,7 @@ public class FetchDataUtil {
         if(doc==null || doc.body()==null){
             return new HashSet<String>();
         }
-        return fetchFromContent(doc.body().text(), regex);
+        return fetchFromContent(doc.body().html(), regex);
     }
 
     public static Set<String> fetchEmail(String url) {
@@ -48,6 +48,10 @@ public class FetchDataUtil {
         if(StringTools.isEmptyOrNone(content)){
             return  datas;
         }
+
+        System.out.println("=========================================================================");
+        System.out.println(content);
+        System.out.println("=========================================================================");
 
         if (!StringTools.isEmptyOrNone(regex)) {
           /*  if (!regex.startsWith("/")) {

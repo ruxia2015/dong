@@ -30,7 +30,7 @@ public class parseHtml {
 
 
             Document doc = Jsoup.connect("http://www.csdn.net/").get();
-            String body = doc.body().toString();
+            String body = doc.body().html();
 
             String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
             Pattern p = Pattern.compile(emailRegex);

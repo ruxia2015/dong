@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +11,7 @@
     <jsp:include page="../common/common.jsp"/>
 
     <script type="text/javascript">
-       $(document).ready(function() {
+        $(document).ready(function () {
             $("#type").val("${type}");
         });
 
@@ -42,7 +43,8 @@
                         </ul>
 
 
-                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fetchFromSite.action" method="post">
+                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fetchFromSite.action"
+                              method="post">
 
                             <div class="form-group">
                                 <label for="type" class="col-sm-2 control-label">搜索引擎类型</label>
@@ -74,21 +76,27 @@
                             </div>
                         </form>
 
-                        <div style="padding: 10px;padding-bottom:40px;height: 500px;">
-                            <h3>提取的结果：</h3>
-                            <button onclick="selectAll();">全选</button>
-                            <c:if test="${  emails!=null and (emails.size() == 0) }">
-                                没有信息
-                            </c:if>
-                            <c:if test="${not empty emails}">
-                                一共有${emails.size()}记录。
-                            </c:if>
-                            <textarea id="resultHtml"
-                                      style="overflow-y: scroll; background:rgba(0, 136, 0, 0.19);width:90%;height: 90%;">
-                            <c:forEach items="${emails}" var="email">${email}
-                            </c:forEach>
-                            </textarea>
+
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">失败记录</div>
+                            <div class="panel-body">
+                                <c:forEach items="${fails}" var="it">
+                                    ${it}<br/>
+                                </c:forEach>
+                            </div>
                         </div>
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">结果（${fn:length(emails)}个）</div>
+                            <div class="panel-body">
+                                <c:forEach items="${emails}" var="email">
+                                    ${email}<br/>
+                                </c:forEach>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
