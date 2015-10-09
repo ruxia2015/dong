@@ -3,10 +3,8 @@ package com.dong.sitserver.util;
 import com.dong.sitserver.common.util.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -19,19 +17,19 @@ public class FetchDataUtil {
 
     public static Set<String> getUrls(String url) {
         Document doc = HttpUtils.accessUrl(url);
-        if(doc==null || doc.body()==null){
+        if (doc == null || doc.body() == null) {
             return new HashSet<String>();
         }
 
         String content = doc.body().html();
 
-        Set<String> urls = fetchFromContent(content,PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG,PropertyConstant.REGEX_HTTP));
+        Set<String> urls = fetchFromContent(content, PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_HTTP));
         return urls;
     }
 
     public static Set<String> fectchDataByUrl(String regex, String url) {
         Document doc = HttpUtils.accessUrl(url);
-        if(doc==null || doc.body()==null){
+        if (doc == null || doc.body() == null) {
             return new HashSet<String>();
         }
         return fetchFromContent(doc.body().html(), regex);
@@ -45,19 +43,10 @@ public class FetchDataUtil {
 
     public static Set<String> fetchFromContent(String content, String regex) {
         Set<String> datas = new HashSet<String>();
-        if(StringTools.isEmptyOrNone(content)){
-            return  datas;
+        if (StringTools.isEmptyOrNone(content)) {
+            return datas;
         }
 
-        System.out.println("=========================================================================");
-        System.out.println(content);
-        System.out.println("=========================================================================");
-
-        if (!StringTools.isEmptyOrNone(regex)) {
-          /*  if (!regex.startsWith("/")) {
-                regex = "/" + regex + "/";
-            }*/
-        }
         // String emailRegex = "/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+/";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(content);
@@ -73,16 +62,16 @@ public class FetchDataUtil {
         String url = "C:\\Users\\rxia\\Desktop\\2.txt";
         String emailRegex = "[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+";
         File file = new File(url);
-        String content  = FileUtil.readFile(url);
+        String content = FileUtil.readFile(url);
        /* try {
            // content = new String(content.getBytes("ISO-8859-1"),"utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }*/
         System.out.print(content);
-        Set<String>  ste = fetchFromContent(content, emailRegex);
+        Set<String> ste = fetchFromContent(content, emailRegex);
         System.out.println("\n\n=======================================");
-        for(String str:ste){
+        for (String str : ste) {
             System.out.println(str);
         }
 

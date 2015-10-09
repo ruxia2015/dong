@@ -120,36 +120,62 @@ public class FecthMessageSimpleComtroller {
         return mv;
     }
 
-    public static List<String> match(String source, String element, String attr) {
-        List<String> result = new ArrayList<String>();
-        String reg = "([a-zA-Z0-9_-])+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+";
-        Matcher m = Pattern.compile(reg).matcher(source);
-        while (m.find()) {
-            String r = m.group();
-            result.add(r);
+
+
+
+
+    @RequestMapping("/fetch/toDepthFetchFromSite.action")
+    public ModelAndView toDepthFetchFromSite() {
+        ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");
+        return mv;
+    }
+
+
+    @RequestMapping("fetch/depthFetchFromSite.action")
+    public ModelAndView depthFetchFromSite(@RequestParam(value = "sitePages", defaultValue = "") String sitePages,
+                              @RequestParam(value = "type", defaultValue = "") String type,
+                              @RequestParam(value = "regex", defaultValue = "") String regex,
+                              @RequestParam(value = "onlySelfDomain",defaultValue="")String onlySelfDomain) {
+
+        if (StringTools.isEmptyOrNone(regex)) {
+            regex = PropertiesUtil.getConfigVaue(PropertyConstant.REGEX_EMAIL);
         }
-        return result;
-    }
 
-    public static void main(String[] args) {
-        String source="   <p class=\"r_option\"> <a href=\"javascript:;\" onclick=\"window.scrollTo(0,0);\" id=\"a_top\" title=\"TOP\"><img src=\"image/top.gif\" alt=\"\" style=\"padding: 5px 6px 6px;\"></a> </p> \n" +
-                "  <p> OPEN开源家园 - <a href=\"mailto:webadmin@open-open.com\">联系我们</a> - <a href=\"http://www.miibeian.gov.cn\" target=\"_blank\">闽ICP备10022058号</a></p> ";
-        List<String> list = match(source, "a", "title");
-        System.out.println(list);
-    }
+        Set<String> fails = new HashSet<String>();
+        Set<String> emails = new HashSet<String>();
 
+        if ("http".equals(type)) {
+            String[] siteArr = sitePages.split("\r|\n");
+            for (String str : siteArr) {
+                try {
+                    emails.addAll(FetchDataUtil.fectchDataByUrl(regex, str));
+                } catch (ServiceException e) {
+                    logger.error(e);
+                    fails.add(str);
+                }
+            }
+        } else if ("str".equals(type)) {
+            emails = FetchDataUtil.fetchFromContent(sitePages, regex);
 
-    public static void main2(String[] args){
-        String content=" <li><a href= mailto: admin@bootcss.com >电子邮件</a></li>";
-        String regex = "[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\\\.[a-zA-Z0-9_-]+)+";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(content);
-
-        while (m.find()) {
-            String g = m.group();
-           System.out.println(g);
+        } else if ("file".equals(type)) {
+            String[] siteArr = sitePages.split("\r|\n");
+            for (String temp : siteArr) {
+                try {
+                    String content = FileUtil.readFile(temp);
+                    emails.addAll(FetchDataUtil.fetchFromContent(content, regex));
+                } catch (ServiceException e) {
+                    logger.error(e);
+                    fails.add(temp);
+                }
+            }
         }
-    }
 
+        ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");
+        mv.addObject("sitePages", sitePages);
+        mv.addObject("type", type);
+        mv.addObject("emails", emails);
+        mv.addObject("fails", fails);
+        return mv;
+    }
 
 }

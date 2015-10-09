@@ -47,7 +47,7 @@
 						<li class="dropdown-header">信息管理</li>
 						<li><a href="<%=request.getContextPath() %>/fetch/toFetch.action">搜索信息-简单法</a></li>
 						<li><a href="<%=request.getContextPath() %>/fetch/toFetchFromSite.action">提取页面信息</a></li>
-
+						<li><a href="<%=request.getContextPath() %>/fetch/toDepthFetchFromSite.action">深入提取页面信息</a></li>
 					</ul>
 				</li>
 
