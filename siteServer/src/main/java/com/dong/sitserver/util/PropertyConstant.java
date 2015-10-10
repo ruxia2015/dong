@@ -10,6 +10,7 @@ public interface PropertyConstant {
     static String REGEX_EMAIL = "regex.email";
     static  String REGEX_HTTP = "regex.http";
     static String FETCH_OUTPUT_PATH = "fetch.output.path";
+    static String DEPTH_FETCH_OUTPUT_PATH  = "depth.fetch.output.path";
 
 
 }

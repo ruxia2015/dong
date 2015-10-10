@@ -49,6 +49,17 @@ public class DomainUtil {
         return newSite;
     }
 
+
+    public static String merginSite(String currentSite,String href){
+        String newSite = "";
+
+        if(href.startsWith("/") ||href.startsWith("./")){
+            newSite = getDomain(currentSite,true)  + href.replaceFirst("\\.?/","");
+        }
+
+        return newSite;
+    }
+
     public static String toNormalSite(String site) {
         if (!site.startsWith("http")) {
             site = "http://" + site;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,11 +43,28 @@
                         </ul>
 
 
-                        <form class="form-horizontal" action="<%=request.getContextPath()%>/fetch/fetchFromSite.action"
+                        <form class="form-horizontal"
+                              action="<%=request.getContextPath()%>/fetch/depthFetchFromSite.action"
                               method="post">
 
                             <div class="form-group">
+                                <label for="type" class="col-sm-2 control-label">是否只查询本域名</label>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="checkbox" aria-label="...">
+                                          </span>
+                                        <input type="text" class="form-control" aria-label="...">
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                                <!-- /.col-lg-6 -->
+                            </div>
+
+
+                            <div class="form-group">
                                 <label for="type" class="col-sm-2 control-label">搜索引擎类型</label>
+
 
                                 <div class="col-sm-10">
                                     <select id="type" name="type">
@@ -77,24 +94,14 @@
                         </form>
 
 
-                        <div class="panel panel-danger">
-                            <div class="panel-heading">失败记录</div>
-                            <div class="panel-body">
-                                <c:forEach items="${fails}" var="it">
-                                    ${it}<br/>
-                                </c:forEach>
-                            </div>
-                        </div>
-
                         <div class="panel panel-success">
-                            <div class="panel-heading">结果（${fn:length(emails)}个）</div>
+                            <div class="panel-heading">提示信息</div>
                             <div class="panel-body">
-                                <c:forEach items="${emails}" var="email">
-                                    ${email}<br/>
-                                </c:forEach>
+                                文件路径：${filepath} <br/>
+                                处理状况:${thread} <br/>
+
                             </div>
                         </div>
-
 
 
                     </div>

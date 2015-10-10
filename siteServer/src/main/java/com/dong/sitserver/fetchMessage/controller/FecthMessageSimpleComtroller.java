@@ -3,6 +3,7 @@ package com.dong.sitserver.fetchMessage.controller;
 import com.dong.sitserver.common.ServiceException;
 import com.dong.sitserver.common.util.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
+import com.dong.sitserver.fetchMessage.thread.DepthFetchDataRunnable;
 import com.dong.sitserver.fetchMessage.thread.FastSearchRunnable;
 import com.dong.sitserver.util.FetchDataUtil;
 import com.dong.sitserver.util.PropertiesUtil;
@@ -15,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by rxia on 2015/9/15.
@@ -121,9 +120,6 @@ public class FecthMessageSimpleComtroller {
     }
 
 
-
-
-
     @RequestMapping("/fetch/toDepthFetchFromSite.action")
     public ModelAndView toDepthFetchFromSite() {
         ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");
@@ -133,49 +129,31 @@ public class FecthMessageSimpleComtroller {
 
     @RequestMapping("fetch/depthFetchFromSite.action")
     public ModelAndView depthFetchFromSite(@RequestParam(value = "sitePages", defaultValue = "") String sitePages,
-                              @RequestParam(value = "type", defaultValue = "") String type,
-                              @RequestParam(value = "regex", defaultValue = "") String regex,
-                              @RequestParam(value = "onlySelfDomain",defaultValue="")String onlySelfDomain) {
+                                           @RequestParam(value = "type", defaultValue = "") String type,
+                                           @RequestParam(value = "regex", defaultValue = "") String regex,
+                                           @RequestParam(value = "onlySelfDomain", defaultValue = "") String onlySelfDomain) {
 
         if (StringTools.isEmptyOrNone(regex)) {
             regex = PropertiesUtil.getConfigVaue(PropertyConstant.REGEX_EMAIL);
         }
 
-        Set<String> fails = new HashSet<String>();
-        Set<String> emails = new HashSet<String>();
 
         if ("http".equals(type)) {
             String[] siteArr = sitePages.split("\r|\n");
-            for (String str : siteArr) {
-                try {
-                    emails.addAll(FetchDataUtil.fectchDataByUrl(regex, str));
-                } catch (ServiceException e) {
-                    logger.error(e);
-                    fails.add(str);
-                }
-            }
-        } else if ("str".equals(type)) {
-            emails = FetchDataUtil.fetchFromContent(sitePages, regex);
 
-        } else if ("file".equals(type)) {
-            String[] siteArr = sitePages.split("\r|\n");
-            for (String temp : siteArr) {
-                try {
-                    String content = FileUtil.readFile(temp);
-                    emails.addAll(FetchDataUtil.fetchFromContent(content, regex));
-                } catch (ServiceException e) {
-                    logger.error(e);
-                    fails.add(temp);
-                }
-            }
+            new Thread(new DepthFetchDataRunnable(Arrays.asList(siteArr), Boolean.parseBoolean(onlySelfDomain), regex)).start();
+
         }
 
+
         ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");
-        mv.addObject("sitePages", sitePages);
-        mv.addObject("type", type);
-        mv.addObject("emails", emails);
-        mv.addObject("fails", fails);
+        mv.addObject("filepath", PropertiesUtil.getConfigVaue(PropertyConstant.DEPTH_FETCH_OUTPUT_PATH));
+        mv.addObject("thread", Thread.activeCount());
+
         return mv;
     }
+
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.dong.sitserver.common.util;
 
 import java.io.*;
+import java.util.Collection;
 
 public class FileUtil {
     /**
@@ -35,28 +36,44 @@ public class FileUtil {
 
     }
 
+    public static boolean writeCollectionToFile(String path, Collection<String> lists, boolean isAppend) {
+        String content = "";
+        for (String str : lists) {
+            content = content + "\r\n";
+        }
+
+        return writeToFile(path, null, content, isAppend);
+
+    }
+
     public static boolean writeToFile(String path,
                                       String content) {
 
-        return writeToFile(path,null,content);
+        return writeToFile(path, null, content, false);
 
     }
 
     public static boolean writeToFile(String path, String defaultFileName,
                                       String content) {
+        return writeToFile(path, defaultFileName, content, false);
+    }
+
+    public static boolean writeToFile(String path, String defaultFileName,
+                                      String content, boolean isAppend) {
         File file = getFile(path, defaultFileName);
 
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        FileOutputStream fos = null;
+
         try {
-            if(file.exists()){
+            fos = new FileOutputStream(file, isAppend);
+            if (file.exists()) {
                 file.createNewFile();
             }
 
 
             byte[] con = content.getBytes();
-            os.write(con);
-            os.flush();
-            os.writeTo(new FileOutputStream(file));
+
+            fos.write(con);
         } catch (FileNotFoundException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -66,7 +83,8 @@ public class FileUtil {
         } finally {
 
             try {
-                os.close();
+
+                fos.close();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -116,7 +134,7 @@ public class FileUtil {
 
 
     public static void main(String[] args) {
-        writeToFile("d:\\1", "1.csv", "sd,sd\r\nd,sd");
+       // writeToFile("d:\\1", "1.csv", "sd,sd\r\nd,sd");
         String con = readFile("d:\\1\\ResourceAccount_2015-04-20.csv");
         System.out.println(con);
     }
