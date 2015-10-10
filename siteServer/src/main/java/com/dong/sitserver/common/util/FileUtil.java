@@ -9,30 +9,17 @@ public class FileUtil {
      * <功能详细描述>
      *
      * @param path
-     * @param defaultFileName
      * @return File [返回类型说明]
      * @throws throws [违例类型] [违例说明]
      * @see [类、类#方法、类#成员]
      */
-    public static File getFile(String path, String defaultFileName) {
+    public static File getFile(String path) {
         File file = new File(path);
-        if (file.exists() && file.isFile()) {
-            return file;
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
         }
 
-        if (!file.exists()) {
-            if (file.getName().contains(".") || StringTools.isEmptyOrNone(defaultFileName)) {
-                File pFile = file.getParentFile();
-                if (!pFile.exists()) {
-                    pFile.mkdirs();
-                }
-            } else {
-                file.mkdirs();
-            }
-        }
-
-        File newFile = new File(path + File.separator + defaultFileName);
-        return newFile;
+        return file;
 
     }
 
@@ -42,25 +29,23 @@ public class FileUtil {
             content = content + "\r\n";
         }
 
-        return writeToFile(path, null, content, isAppend);
+        return writeToFile(path,  content, isAppend);
 
     }
 
     public static boolean writeToFile(String path,
                                       String content) {
 
-        return writeToFile(path, null, content, false);
+        return writeToFile(path, content, false);
 
     }
 
-    public static boolean writeToFile(String path, String defaultFileName,
-                                      String content) {
-        return writeToFile(path, defaultFileName, content, false);
-    }
 
-    public static boolean writeToFile(String path, String defaultFileName,
+
+
+    public static boolean writeToFile(String path,
                                       String content, boolean isAppend) {
-        File file = getFile(path, defaultFileName);
+        File file = getFile(path);
 
         FileOutputStream fos = null;
 
@@ -93,6 +78,7 @@ public class FileUtil {
 
         return false;
     }
+
 
     public static String readFile(String filePath) {
         File f = new File(filePath);
@@ -134,7 +120,7 @@ public class FileUtil {
 
 
     public static void main(String[] args) {
-       // writeToFile("d:\\1", "1.csv", "sd,sd\r\nd,sd");
+        // writeToFile("d:\\1", "1.csv", "sd,sd\r\nd,sd");
         String con = readFile("d:\\1\\ResourceAccount_2015-04-20.csv");
         System.out.println(con);
     }

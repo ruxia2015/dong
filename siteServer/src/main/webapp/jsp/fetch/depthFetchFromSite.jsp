@@ -47,19 +47,17 @@
                               action="<%=request.getContextPath()%>/fetch/depthFetchFromSite.action"
                               method="post">
 
+
                             <div class="form-group">
-                                <label for="type" class="col-sm-2 control-label">是否只查询本域名</label>
-                                <div class="col-lg-6">
-                                    <div class="input-group">
-                                          <span class="input-group-addon">
-                                            <input type="checkbox" aria-label="...">
-                                          </span>
-                                        <input type="text" class="form-control" aria-label="...">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <!-- /.col-lg-6 -->
+                                <label for="onlySelfDomain" class="col-sm-2 control-label">本网站</label>
+                                <div class="col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="onlySelfDomain" id="onlySelfDomain">
+                                </label>
                             </div>
+                                </div>
+                                </div>
 
 
                             <div class="form-group">
@@ -98,7 +96,7 @@
                             <div class="panel-heading">提示信息</div>
                             <div class="panel-body">
                                 文件路径：${filepath} <br/>
-                                处理状况:${thread} <br/>
+                                处理状况：${thread} <br/>
 
                             </div>
                         </div>

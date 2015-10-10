@@ -13,7 +13,7 @@ import java.util.Map;
 public class CsvUtil {
 
 
-    public static File wirteToCsv(List objs, String fiePath) {
+    public static File wirteToCsv(Collection objs, String fiePath) {
 
         String filename = "";
         String content = getCsvContent(objs);
@@ -21,7 +21,7 @@ public class CsvUtil {
         filename = filename + "_" + DateUtil.getNowDate() + ".csv";
 
         //写入文件
-        FileUtil.writeToFile(fiePath, filename, content);
+        FileUtil.writeToFile(fiePath +File.separator +filename, content);
 
         System.err.println(content);
 

@@ -81,7 +81,9 @@ public class DepthFetchDataRunnable implements Runnable {
 
 
         //进入下一轮
-        depthFetchLinks(onlySelfDomain, newLinks, regex);
+        if(newLinks.size()>0) {
+            depthFetchLinks(onlySelfDomain, newLinks, regex);
+        }
 
     }
 

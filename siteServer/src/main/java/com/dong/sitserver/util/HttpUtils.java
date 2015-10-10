@@ -2,6 +2,7 @@ package com.dong.sitserver.util;
 
 
 import com.dong.sitserver.common.ServiceException;
+import com.dong.sitserver.common.util.StringTools;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -29,6 +30,9 @@ public class HttpUtils {
     }
 
     public static Document accessUrl(String url, String charset) {
+        if(StringTools.isEmptyOrNone(url)){
+            return null;
+        }
 
         Set<String> datas = new HashSet<String>();
         Document doc = null;
@@ -77,7 +81,7 @@ public class HttpUtils {
 
 
         } catch (Exception e) {
-            logger.error("访问出错",e);
+            logger.error("访问出错 == > "+url,e);
            throw new ServiceException("访问出错",e);
 
         }

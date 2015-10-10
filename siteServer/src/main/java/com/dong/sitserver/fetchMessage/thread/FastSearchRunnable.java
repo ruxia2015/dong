@@ -110,7 +110,7 @@ public class FastSearchRunnable implements Runnable {
 
                 }
                 String filePath = PropertiesUtil.getConfigVaue(PropertyConstant.FETCH_OUTPUT_PATH) + "/" + searcherType + "_" + DateUtil.nowDate("yyyyMMdd");
-                FileUtil.writeToFile(filePath, searcherType + "_email_" + System.currentTimeMillis() + ".txt", content,false);
+                FileUtil.writeToFile(filePath +"\\"+ searcherType + "_email_" + System.currentTimeMillis() + ".txt", content,false);
             } else {
                 logger.info("没有数据！  " + site);
             }

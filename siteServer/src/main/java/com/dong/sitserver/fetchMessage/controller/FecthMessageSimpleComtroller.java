@@ -138,12 +138,12 @@ public class FecthMessageSimpleComtroller {
         }
 
 
-        if ("http".equals(type)) {
+
             String[] siteArr = sitePages.split("\r|\n");
 
             new Thread(new DepthFetchDataRunnable(Arrays.asList(siteArr), Boolean.parseBoolean(onlySelfDomain), regex)).start();
 
-        }
+
 
 
         ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");

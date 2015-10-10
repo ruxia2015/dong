@@ -55,7 +55,7 @@ public class SearchRunnable implements Runnable {
 
         if(contents!=null && contents.size()>0){
             String str = url + "\n\r" +ArrayUtils.toString(contents);
-            FileUtil.writeToFile(PropertiesUtil.getConfigVaue( PropertyConstant.FETCH_OUTPUT_PATH), "count_email_" + System.currentTimeMillis() + ".txt",str,true);
+            FileUtil.writeToFile(PropertiesUtil.getConfigVaue( PropertyConstant.FETCH_OUTPUT_PATH) +  "\\count_email_" + System.currentTimeMillis() + ".txt",str,true);
 
         }
 
@@ -149,7 +149,7 @@ public class SearchRunnable implements Runnable {
 
             }
 
-            FileUtil.writeToFile(PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.FETCH_OUTPUT_PATH), "email_" + System.currentTimeMillis() + ".txt", sb.toString(),true);
+            FileUtil.writeToFile(PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.FETCH_OUTPUT_PATH)+ "\\email_" + System.currentTimeMillis() + ".txt", sb.toString(),true);
 
         }
     }

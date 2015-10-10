@@ -17,6 +17,7 @@ public class DomainUtil {
 
 
     public static String getDomain(String site, boolean needHttp) {
+        if(StringTools.isEmptyOrNone(site)){return null;}
         if (!needHttp) {
             site = site.replaceFirst("^http[s]?:(//|\\\\)", "");
         }
@@ -30,6 +31,7 @@ public class DomainUtil {
     }
 
     public static String getMainDomain(String site, boolean needHttp) {
+        if(StringTools.isEmptyOrNone(site)){return null;}
         site = getDomain(site, needHttp);
 
         String newSite = site;
@@ -51,10 +53,13 @@ public class DomainUtil {
 
 
     public static String merginSite(String currentSite,String href){
+        if(StringTools.isEmptyOrNone(href)){return null;}
         String newSite = "";
 
         if(href.startsWith("/") ||href.startsWith("./")){
-            newSite = getDomain(currentSite,true)  + href.replaceFirst("\\.?/","");
+            String domain = getDomain(currentSite,true);
+            if(StringTools.isEmptyOrNone(domain)){return null;}
+            newSite =domain   + href.replaceFirst("\\.?/","");
         }
 
         return newSite;
