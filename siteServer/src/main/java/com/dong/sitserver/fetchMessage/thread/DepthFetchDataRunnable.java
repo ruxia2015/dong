@@ -2,10 +2,13 @@ package com.dong.sitserver.fetchMessage.thread;
 
 import com.dong.sitserver.common.util.DomainUtil;
 import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.util.FetchDataUtil;
 import com.dong.sitserver.util.HttpUtils;
 import com.dong.sitserver.util.PropertiesUtil;
 import com.dong.sitserver.util.PropertyConstant;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,6 +20,7 @@ import java.util.*;
  * Created by rxia on 2015/10/9.
  */
 public class DepthFetchDataRunnable implements Runnable {
+    private Log logger = LogFactory.getLog(getClass());
     //已经查找的地址
     private Set<String> haveFetchLinks = new HashSet<String>();
     private Set<String> allLinks = new HashSet<String>();
@@ -36,20 +40,21 @@ public class DepthFetchDataRunnable implements Runnable {
     private boolean onlySelfDomain = false;
 
 
-    public DepthFetchDataRunnable(Collection<String> sites, boolean onlySelfDomain,String regex) {
+    public DepthFetchDataRunnable(Collection<String> sites, boolean onlySelfDomain, String regex) {
         this.sites = sites;
         this.onlySelfDomain = onlySelfDomain;
         this.regex = regex;
     }
 
-    public DepthFetchDataRunnable(Collection<String> sites,String regex) {
-        this.sites = sites; this.regex = regex;
-        this.onlySelfDomain =false;
+    public DepthFetchDataRunnable(Collection<String> sites, String regex) {
+        this.sites = sites;
+        this.regex = regex;
+        this.onlySelfDomain = false;
     }
 
     @Override
     public void run() {
-        depthFetchLinks(onlySelfDomain,sites,regex);
+        depthFetchLinks(onlySelfDomain, sites, regex);
 
     }
 
@@ -81,8 +86,10 @@ public class DepthFetchDataRunnable implements Runnable {
 
 
         //进入下一轮
-        if(newLinks.size()>0) {
+        if (newLinks.size() > 0) {
             depthFetchLinks(onlySelfDomain, newLinks, regex);
+        } else {
+            logger.info("depth fetch data over!");
         }
 
     }
@@ -100,6 +107,9 @@ public class DepthFetchDataRunnable implements Runnable {
         while (it.hasNext()) {
             Element e = (Element) it.next();
             String href = e.attr("href");
+            if (StringTools.isEmptyOrNone(href) || href.startsWith("javascript:")) {
+                continue;
+            }
             href = DomainUtil.merginSite(site, href);
 
             //不本域名，且只处理本域名的地址，则不处理
@@ -112,6 +122,9 @@ public class DepthFetchDataRunnable implements Runnable {
                 links.add(domain);
             }
         }
+
+        //添加地址
+        links.addAll(FetchDataUtil.fetchFromContent(doc.html(), PropertiesUtil.getConfigVaue(PropertyConstant.REGEX_HTTP)));
 
         Set<String> datas = FetchDataUtil.fetchFromContent(doc.html(), regex);
         Map<String, Set<String>> results = new HashMap<String, Set<String>>();

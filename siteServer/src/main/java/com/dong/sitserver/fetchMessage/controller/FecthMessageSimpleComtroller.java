@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -137,14 +136,9 @@ public class FecthMessageSimpleComtroller {
             regex = PropertiesUtil.getConfigVaue(PropertyConstant.REGEX_EMAIL);
         }
 
+        String[] siteArr = sitePages.split("\r|\n");
 
-
-            String[] siteArr = sitePages.split("\r|\n");
-
-            new Thread(new DepthFetchDataRunnable(Arrays.asList(siteArr), Boolean.parseBoolean(onlySelfDomain), regex)).start();
-
-
-
+        new Thread(new DepthFetchDataRunnable(Arrays.asList(siteArr), Boolean.parseBoolean(onlySelfDomain), regex)).start();
 
         ModelAndView mv = new ModelAndView("fetch/depthFetchFromSite");
         mv.addObject("filepath", PropertiesUtil.getConfigVaue(PropertyConstant.DEPTH_FETCH_OUTPUT_PATH));
@@ -152,8 +146,6 @@ public class FecthMessageSimpleComtroller {
 
         return mv;
     }
-
-
 
 
 }

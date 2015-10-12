@@ -17,21 +17,27 @@ public class DomainUtil {
 
 
     public static String getDomain(String site, boolean needHttp) {
-        if(StringTools.isEmptyOrNone(site)){return null;}
-        if (!needHttp) {
-            site = site.replaceFirst("^http[s]?:(//|\\\\)", "");
+        if (StringTools.isEmptyOrNone(site)) {
+            return null;
         }
+
+        String start = site.replaceFirst(":.*", "");
+
+        site = site.replaceFirst("^http[s]?:(//|\\\\)", "");
         site = site.replaceFirst("[/?\\\\]+.*", "");
 
+
         if (needHttp && !site.startsWith("http")) {
-            site = "http://" + site;
+            site = StringTools.isEmptyOrNone(start) ? "http://" : start + "://" + site;
 
         }
         return site;
     }
 
     public static String getMainDomain(String site, boolean needHttp) {
-        if(StringTools.isEmptyOrNone(site)){return null;}
+        if (StringTools.isEmptyOrNone(site)) {
+            return null;
+        }
         site = getDomain(site, needHttp);
 
         String newSite = site;
@@ -44,7 +50,7 @@ public class DomainUtil {
         }
 
         if (needHttp) {
-            newSite = site.substring(0, site.indexOf("/") + 1) + newSite;
+            newSite = site.substring(0, site.indexOf("/") + 2) + newSite;
         }
 
 
@@ -52,14 +58,18 @@ public class DomainUtil {
     }
 
 
-    public static String merginSite(String currentSite,String href){
-        if(StringTools.isEmptyOrNone(href)){return null;}
-        String newSite = "";
+    public static String merginSite(String currentSite, String href) {
+        if (StringTools.isEmptyOrNone(href)) {
+            return null;
+        }
+        String newSite = href;
 
-        if(href.startsWith("/") ||href.startsWith("./")){
-            String domain = getDomain(currentSite,true);
-            if(StringTools.isEmptyOrNone(domain)){return null;}
-            newSite =domain   + href.replaceFirst("\\.?/","");
+        if (href.startsWith("/") || href.startsWith("./")) {
+            String domain = getDomain(currentSite, true);
+            if (StringTools.isEmptyOrNone(domain)) {
+                return null;
+            }
+            newSite = domain + href.replaceFirst("\\.?/", "");
         }
 
         return newSite;
@@ -74,7 +84,9 @@ public class DomainUtil {
 
 
     public static void main(String[] args) {
-        System.out.println(getMainDomain("gmail.google.com.cn\\/??/http", true));
+
+        System.out.println(getMainDomain("https://gmail.google.com.cn\\/??/http", true)
+        );
     }
 
 }

@@ -24,12 +24,15 @@ public class FileUtil {
     }
 
     public static boolean writeCollectionToFile(String path, Collection<String> lists, boolean isAppend) {
+        if (lists == null || lists.size() == 0) {
+            return true;
+        }
         String content = "";
         for (String str : lists) {
             content = content + "\r\n";
         }
 
-        return writeToFile(path,  content, isAppend);
+        return writeToFile(path, content, isAppend);
 
     }
 
@@ -41,10 +44,11 @@ public class FileUtil {
     }
 
 
-
-
     public static boolean writeToFile(String path,
                                       String content, boolean isAppend) {
+        if (StringTools.isEmptyOrNone(content)) {
+            return true;
+        }
         File file = getFile(path);
 
         FileOutputStream fos = null;
@@ -116,13 +120,6 @@ public class FileUtil {
 
 
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        // writeToFile("d:\\1", "1.csv", "sd,sd\r\nd,sd");
-        String con = readFile("d:\\1\\ResourceAccount_2015-04-20.csv");
-        System.out.println(con);
     }
 
 
