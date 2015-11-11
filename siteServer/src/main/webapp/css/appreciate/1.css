@@ -1,0 +1,130 @@
+.circle,.squircle{
+	border-top:0.1em solid rgba(255,255,0,4);
+	height: 12.5em;
+	width: 12.5em;
+	position: absolute;
+}
+
+.circle {
+	border-radius:50%;
+	box-shadow: 0 1em 2em rgba(0,0,0,0.5);
+	left: calc(50% - 6.25em);
+	top: calc(50% - 12.5em);
+	transform-origin: 50% 12.5em;
+}
+
+.small{
+	width:5em;
+	height:5em;
+	left: calc(50% - 12.5em);
+	top: calc(50% - 12.5em);
+	transform-origin: 13em 14em;
+}
+.small-shapes{
+
+
+}
+
+.squircle{
+	border-radius: 25%;
+}
+.small .squircle{
+	box-shadow: none;
+	border: none;
+}
+
+
+
+
+.one{
+	background-color: rgba(255, 37, 37, 0.52);
+	transform:rotateZ(225deg)
+}
+.two{
+	background-color: rgba(255, 50, 168, 0.51);
+	transform:rotateZ(180deg)
+
+}
+
+.three{
+	background-color: rgba(106, 67, 255, 0.53);
+	transform:rotateZ(135deg)
+}
+
+.four{
+	background-color: rgba(109, 156, 255, 0.52);
+	transform:rotateZ(90deg)
+}
+
+
+.five{
+	background-color: rgba(101, 255, 230, 0.56);
+	transform:rotateZ(35deg)
+}
+
+.six{
+	background-color: rgba(135, 255, 145, 0.51);
+	transform:rotateZ(-15deg)
+}
+
+.seven{
+	background-color: rgba(255, 251, 121, 0.51);
+	transform:rotateZ(-60deg)
+}
+
+.eight{
+	background-color: rgba(255, 133, 48, 0.51);
+	transform:rotateZ(-95deg)
+}
+
+
+
+span{
+	display: block;
+	height: 20em;
+	left: calc(50% - 10em);
+	position: absolute;
+	top: calc(50% - 10em);
+	width: 20em;;
+}
+
+ @keyframes spin {
+	0%{
+		transform: rotateZ(0deg);
+		opacity: 0.1;
+	}
+	50%{
+		opacity: 0.7;
+	}
+
+	100%{
+		transform: rotateZ(360deg);
+		opacity: 0.1;
+
+	}
+}
+
+@keyframes spin2 {
+	0%{
+		transform: rotateZ(360deg);
+		opacity: 0.1;
+	}
+	50%{
+		opacity: 0.7;
+	}
+
+	100%{
+		transform: rotateZ(00deg);
+		opacity: 0.1;
+
+	}
+}
+
+
+.large-circles{
+	animation: spin 10s linear infinite;
+}
+
+.small-shapes{
+	animation: spin2 20s linear infinite;
+}

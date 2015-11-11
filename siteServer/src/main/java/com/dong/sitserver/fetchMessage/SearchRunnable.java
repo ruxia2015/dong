@@ -1,7 +1,7 @@
 package com.dong.sitserver.fetchMessage;
 
 
-import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.util.FetchDataUtil;
 import com.dong.sitserver.util.PropertiesUtil;
 import com.dong.sitserver.util.PropertyConstant;

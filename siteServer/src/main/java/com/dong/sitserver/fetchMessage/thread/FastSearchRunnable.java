@@ -2,7 +2,7 @@ package com.dong.sitserver.fetchMessage.thread;
 
 
 import com.dong.sitserver.common.util.DateUtil;
-import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.fetchMessage.fastSearcher.DataFetcher;
 import com.dong.sitserver.fetchMessage.fastSearcher.FastSearcher;
 import com.dong.sitserver.fetchMessage.fastSearcher.impl.BingFastSearcher;

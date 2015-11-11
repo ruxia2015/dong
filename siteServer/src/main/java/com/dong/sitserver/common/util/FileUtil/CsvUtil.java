@@ -1,6 +1,10 @@
-package com.dong.sitserver.common.util;
+package com.dong.sitserver.common.util.FileUtil;
 
 //import com.sun.deploy.util.StringUtils;
+
+import com.dong.sitserver.common.util.DateUtil;
+import com.dong.sitserver.common.util.ExportHeaderAnnotationUtil;
+import com.dong.sitserver.common.util.StringTools;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -21,7 +25,7 @@ public class CsvUtil {
         filename = filename + "_" + DateUtil.getNowDate() + ".csv";
 
         //写入文件
-        FileUtil.writeToFile(fiePath +File.separator +filename, content);
+        FileUtil.writeToFile(fiePath + File.separator + filename, content);
 
         System.err.println(content);
 

@@ -1,7 +1,7 @@
 package com.dong.sitserver.fetchMessage.controller;
 
 import com.dong.sitserver.common.ServiceException;
-import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.fetchMessage.thread.DepthFetchDataRunnable;
 import com.dong.sitserver.fetchMessage.thread.FastSearchRunnable;

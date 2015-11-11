@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
 
     <properties>
+        <activemq.version>5.5.1</activemq.version>
         <spring.version>4.1.7.RELEASE</spring.version>
         <mybatis.version>3.2.2</mybatis.version>
         <slf4j.version>1.7.5</slf4j.version>
@@ -163,6 +164,31 @@
                 <version>1.4</version>
             </dependency>
 <!--apache common -->
+
+            <!-- jms begin -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>5.5.1.MF</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>kahadb</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>5.12.1</version>
+            </dependency>
+
+
+            <!-- jms end -->
 
             <!-- j2ee web spec -->
             <dependency>

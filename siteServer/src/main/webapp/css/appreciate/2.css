@@ -1,0 +1,180 @@
+.bike{
+	width: 1000px;
+	height: 800px;
+	background-color: aquamarine;
+	position: absolute;
+	left:calc(50% - 500px);
+
+}
+
+.font-wheel{
+	width:100px;
+	height: 100%;
+	position: absolute;
+}
+
+.behind-wheel{
+	width:100px;
+	height: 100%;
+	position: absolute;
+	left:300px;
+}
+
+.font-pole{
+	width: 200px;
+	height: 5px;
+	background-color: bisque;
+	top: calc(50% + 2em);
+	position: absolute;
+	transform: rotateZ(-35deg);
+
+}
+
+.circle{
+	border-radius: 50%;
+	width:16em;
+	height: 16em;
+	position: absolute;
+}
+
+.large{
+	left:calc(50% - 0em);
+	top:calc(50% - 0em);
+	position: absolute;
+	background-color: #000000;
+	background:-webkit-linear-gradient(top, #35E857 0%,#BB3F3F 100%);
+}
+
+.small{
+	background-color: #fff;
+	width:15em;
+	height: 15em;
+	position: absolute;
+	left:calc(50% + 2em);
+	top:calc(50% + 2em);
+}
+
+.font-wheel .large{
+	left:calc(30% + 0em);
+	position: absolute;
+}
+
+.font-wheel .small{
+	left:calc(30% + 2em);
+	position: absolute;
+}
+
+.line{
+	width:13em;
+	height:1px;
+	border:1px #6a43ff solid;
+}
+
+.font-wheel .line{
+	position: absolute;
+	top: calc(50% + 0em);
+
+}
+
+.behind-wheel .line{
+	top:calc(50% + 0em);
+	position: absolute;
+	border:1px #ff33ce solid;
+}
+
+
+ .lineF{
+	width:13em;
+	height: 13em;
+	position: absolute;
+}
+
+
+.font-wheel .lineF{
+	left:calc(30% + 1.65em);
+	top:calc(50% + 2em);
+}
+
+.behind-wheel .lineF{
+	left:calc(50% + 1.5em);
+	top:calc(50% + 1.5em);
+
+}
+
+
+.one{
+	transform: rotateZ(0deg);
+}
+.two{
+	transform: rotateZ(15deg);
+}
+
+.three{
+	transform: rotateZ(30deg);
+}
+
+.four{
+	transform: rotateZ(45deg);
+}
+
+.five{
+	transform: rotateZ(60deg);
+}
+
+.six{
+	transform: rotateZ(75deg);
+}
+
+.seven{
+	transform: rotateZ(90deg);
+}
+.eight{
+	transform: rotateZ(105deg);
+}.nine{
+	 transform: rotateZ(120deg);
+ }
+.ten{
+	 transform: rotateZ(135deg);
+ }
+
+.eleven{
+	transform: rotateZ(150deg);
+}
+.twelve{
+	transform: rotateZ(165deg);
+}
+
+
+ .lineF{
+	animation: lineF 10s linear infinite;
+}
+
+@keyframes lineF {
+
+	0%{
+		transform: rotateZ( 0deg);
+	}
+
+	100%{
+		transform: rotateZ(360deg);
+	}
+
+}
+
+.large{
+	animation: wheel 10s linear infinite;
+	box-shadow: 0 1em 2em rgba(0,0,0,0.5);
+}
+
+@keyframes wheel {
+
+	0%{
+		transform: rotateZ( 360deg);
+
+	}
+
+	100%{
+		transform: rotateZ(0deg);
+	}
+
+}

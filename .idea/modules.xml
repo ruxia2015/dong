@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/mybatis_generator_util/mybatis_generator_util.iml" filepath="$PROJECT_DIR$/mybatis_generator_util/mybatis_generator_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/search-master/search.iml" filepath="$PROJECT_DIR$/search-master/search.iml" />
       <module fileurl="file://$PROJECT_DIR$/siteServer/siteServer.iml" filepath="$PROJECT_DIR$/siteServer/siteServer.iml" />
+      <module fileurl="file://G:/spring-framework-4.2.2.RELEASE/buildSrc/spring-build-src.iml" filepath="G:/spring-framework-4.2.2.RELEASE/buildSrc/spring-build-src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springSourceStudy/springSourceStudy.iml" filepath="$PROJECT_DIR$/springSourceStudy/springSourceStudy.iml" />
     </modules>
   </component>
 </project>

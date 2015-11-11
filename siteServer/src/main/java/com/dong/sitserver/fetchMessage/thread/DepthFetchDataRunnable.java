@@ -1,7 +1,7 @@
 package com.dong.sitserver.fetchMessage.thread;
 
 import com.dong.sitserver.common.util.DomainUtil;
-import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import com.dong.sitserver.util.FetchDataUtil;
 import com.dong.sitserver.util.HttpUtils;

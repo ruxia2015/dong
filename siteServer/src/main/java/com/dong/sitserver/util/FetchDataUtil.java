@@ -1,6 +1,6 @@
 package com.dong.sitserver.util;
 
-import com.dong.sitserver.common.util.FileUtil;
+import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
 import org.jsoup.nodes.Document;
 

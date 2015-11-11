@@ -14,7 +14,14 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="<%=request.getContextPath() %>">主页</a></li>
-				<li><a href="#about">关于</a></li>
+				<li class="dropdown">
+					<a href="javascript:void(0)"   class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欣赏<span class="caret"></span></a>
+					<ul class="dropdown-menu" id="dropdown_appreciate">
+						<li><a href="<%=request.getContextPath() %>/jsp/appreciate/1.jsp">旋转的花</a></li>
+						<li><a href="<%=request.getContextPath() %>/jsp/appreciate/2.jsp">自行车</a></li>
+						<li><a href="<%=request.getContextPath() %>/jsp/appreciate/3.jsp">3</a></li>
+					</ul>
+				</li>
 				<li><a href="#contact">联系人</a></li>
 				<li class="dropdown">
 					<a href="javascript:void(0)"   class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">基础功能 <span class="caret"></span></a>
