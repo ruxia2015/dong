@@ -3,27 +3,36 @@ package jms;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created by rxia on 2015/11/6.
  */
 public class Test {
 
-    public static  void main(String[] args){
-        ApplicationContext ap =new ClassPathXmlApplicationContext("applicationContext-jms.xml");
+    URL url = Class.class.getResource("META-INF/spring.handlers");
 
-        SendMessage sendMessage = (SendMessage) ap.getBean("sendMessage");
+    public static void main(String[] args) throws IOException {
+        ApplicationContext ap = new ClassPathXmlApplicationContext("applicationContext-jms.xml");
 
-        System.out.println("sendMessage");
-       for(int i=0;i<1001;i++){
+        SendTopicMessage sendMessage = (SendTopicMessage) ap.getBean("sendMessage");
+
+        System.out.println("sendMessag " + sendMessage);
+      for(int i=0;i<10;i++){
            System.out.println("sendMessage....");
            long time = System.currentTimeMillis();
-            sendMessage.sendMessage("message send " + i);
-           System.out.println("超时时间...." +(System.currentTimeMillis() -  time)/100.0 + "  s");
+            sendMessage.sendMessage("topic xiaoxi " + i);
+         //  System.out.println("超时时间...." +(System.currentTimeMillis() -  time)/100.0 + "  s");
+        }
+
+        SendQueueMessage sendQueueMessage = (SendQueueMessage) ap.getBean("sendQueueMessage");
+
+        System.out.println("*************************************" );
+        for(int i=0;i<10;i++){
+            System.out.println("sendQueueMessage....");
+            sendQueueMessage.sendMessage("topic xiaoxi " + i);
+
         }
 
 /*
@@ -40,8 +49,17 @@ public class Test {
             i++;
         }*/
 
-    }
+/*        //"META-INF/spring.handlers"
+        String resourceName = "META-INF/spring.handlers";
+        Enumeration<URL> urls = ClassLoader.getSystemResources(resourceName);
+        while (urls.hasMoreElements()) {
+            URL url = urls.nextElement();
+            System.out.println(url.getPath());
+        }
+        URL url2 = Test.class.getResource("/META-INF/Spring-test.xsd");
+        System.out.print("-----" + url2.getPath());*/
 
+    }
 
 
 }

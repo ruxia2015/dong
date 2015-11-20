@@ -8,7 +8,7 @@ import javax.jms.*;
 /**
  * Created by rxia on 2015/11/5.
  */
-public class SendMessage {
+public class SendTopicMessage {
     private JmsTemplate jmsTemplate;
     private String topicName;
     private Topic topic;

@@ -59,7 +59,15 @@
             <version>${logback.version}</version>
         </dependency>
         <!-- LOGGING end -->
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
     </dependencies>
+
 
 
     <!-- 预定义依赖项的version、scope与exclusions，子项目中只需要定义groupid和artifactid即可 -->
@@ -152,6 +160,11 @@
                 <version>${spring.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 <!-- apache common -->
             <dependency>
                 <groupId>commons-lang</groupId>

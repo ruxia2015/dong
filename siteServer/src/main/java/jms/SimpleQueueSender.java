@@ -126,7 +126,7 @@ public final class SimpleQueueSender {
 
 
                 message.setText(str);
-                LOG.info("Sending message: " + message.getText());
+                LOG.info("Sending message:  --------{}"  ,i);
                 queueSender.send(message);
             }
 

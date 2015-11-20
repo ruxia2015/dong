@@ -11,17 +11,23 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
-<!--
-    <bean id="testListener" class="jms.TestListener">
-        <constructor-arg ref="jmsTemplate"></constructor-arg>
-        <constructor-arg value="testTopic"></constructor-arg>
-        <constructor-arg ref="jmsTemplate2"></constructor-arg>
-    </bean>
--->
 
-    <bean id="sendMessage" class="jms.SendMessage">
-        <property name="jmsTemplate" ref="jmsTemplate"></property>
-        <property name="topicName" value="q.bizQueue"></property>
+
+    <bean id="testListener" class="jms.TestListener">
+        <constructor-arg ref="jmsTemplateQueue"></constructor-arg>
+        <constructor-arg value="testTopic"></constructor-arg>
+        <constructor-arg ref="jmsTemplateQueue"></constructor-arg>
+    </bean>
+
+    <bean id="sendMessage" class="jms.SendTopicMessage">
+        <property name="jmsTemplate" ref="jmsTemplateQueue"></property>
+        <property name="topicName" value="testTopic"></property>
+    </bean>
+
+
+    <bean id="sendQueueMessage" class="jms.SendQueueMessage">
+        <property name="jmsTemplate" ref="jmsTemplateQueue"></property>
+        <property name="topicName" value="testTopic"></property>
     </bean>
 
 
@@ -31,19 +37,32 @@
         <property name="connectionFactory">
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
                 <property name="brokerURL"
-                          value="failover://(tcp://192.168.10.121:61617,tcp://192.168.10.122:61617)?jms.useAsyncSend=true&amp;randomize=false&amp;startupMaxReconnectAttempts=20" />
+                          value="failover://(tcp://127.0.0.1:61616,tcp://192.168.10.121:61617)?jms.useAsyncSend=true&amp;randomize=false&amp;startupMaxReconnectAttempts=20" />
             </bean>
         </property>
         <property name="maxConnections" value="1"></property>
     </bean>
 
-    <bean id="oamTmpTopic" class="org.apache.activemq.command.ActiveMQTopic">
+<!--    <bean id="oamTmpTopic" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="oamTmpTopic" />
+    </bean>-->
+
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="queueActive"/>
     </bean>
 
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+
+<!--    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="defaultDestination" ref="oamTmpTopic" />
+        <property name="explicitQosEnabled" value="true" />
+        <property name="deliveryMode" value="1" />
+    </bean>-->
+
+
+    <bean id="jmsTemplateQueue" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="queue" />
         <property name="explicitQosEnabled" value="true" />
         <property name="deliveryMode" value="1" />
     </bean>

@@ -22,10 +22,11 @@ public class TestListener implements MessageListener{
             topic = this.jmsTemplate.getConnectionFactory().createConnection()
                     .createSession(false, Session.AUTO_ACKNOWLEDGE).createTopic(this.topicName);
             DefaultMessageListenerContainer dmc = new DefaultMessageListenerContainer();
-            dmc.setPubSubDomain(true);
+            dmc.setPubSubDomain(false);
             dmc.setDestination(topic);
-            dmc.setConnectionFactory(this.jmsTemplate2.getConnectionFactory());
+            dmc.setConnectionFactory(this.jmsTemplate.getConnectionFactory());
             dmc.setPubSubNoLocal(true);
+            dmc.setPubSubNoLocal(false);
 
             dmc.setMessageListener(this);
             dmc.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);

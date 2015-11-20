@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dong-parent.iml" filepath="$PROJECT_DIR$/dong-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/littleKnowledge/littleKnowledge.iml" filepath="$PROJECT_DIR$/littleKnowledge/littleKnowledge.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis_generator_util/mybatis_generator_util.iml" filepath="$PROJECT_DIR$/mybatis_generator_util/mybatis_generator_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/search-master/search.iml" filepath="$PROJECT_DIR$/search-master/search.iml" />
       <module fileurl="file://$PROJECT_DIR$/siteServer/siteServer.iml" filepath="$PROJECT_DIR$/siteServer/siteServer.iml" />
