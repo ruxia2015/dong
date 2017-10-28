@@ -40,6 +40,11 @@ public class FetchDataUtil {
         return fectchDataByUrl(emailRegex, url);
     }
 
+    public static Set<String> fetchUrl(String url) {
+        String regex = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_HTTP);
+        return fectchDataByUrl(regex, url);
+    }
+
 
     public static Set<String> fetchFromContent(String content, String regex) {
         Set<String> datas = new HashSet<String>();
