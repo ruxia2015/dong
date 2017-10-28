@@ -29,7 +29,7 @@ public class FileUtil {
         }
         String content = "";
         for (String str : lists) {
-            content = content + "\r\n";
+            content = content + str+"\r\n";
         }
         return writeToFile(path, content, isAppend);
     }
@@ -58,7 +58,7 @@ public class FileUtil {
 
         try {
             fos = new FileOutputStream(file, isAppend);
-            if (file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             byte[] con = content.getBytes();
