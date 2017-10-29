@@ -2,10 +2,13 @@ package com.dong.sitserver.util;
 
 import com.dong.sitserver.common.util.FileUtil.FileUtil;
 import com.dong.sitserver.common.util.StringTools;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,11 +31,22 @@ public class FetchDataUtil {
     }
 
     public static Set<String> fectchDataByUrl(String regex, String url) {
-        Document doc = HttpUtils.accessUrl(url);
-        if (doc == null || doc.body() == null) {
-            return new HashSet<String>();
+        String doc = null;
+        try {
+            if (url.startsWith("https")) {
+                doc = HttpsUtils.post(url);
+            } else {
+                Document document = HttpUtils.accessUrl(url);
+                doc = document.body().html();
+            }
+
+
+            System.out.print(".........." + doc);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return fetchFromContent(doc.body().html(), regex);
+
+        return fetchFromContent(doc, regex);
     }
 
     public static Set<String> fetchEmail(String url) {
@@ -44,6 +58,35 @@ public class FetchDataUtil {
         String regex = PropertiesUtil.getVaue(PropertyConstant.FILE_PATH_CONFIG, PropertyConstant.REGEX_HTTP);
         return fectchDataByUrl(regex, url);
     }
+
+//    public static Set<String> crawlingUtlFromHtml(String url) {
+//
+//        Document doc = HttpHelper.accessUrl(url);
+//        Set<String> urls = new HashSet<String>();
+//
+//        org.jsoup.select.Elements em = doc.getElementsByTag("a");
+//
+//        String domain = HttpUtils.getDomain(url);
+//
+//        Iterator<Element> it = em.iterator();
+//        while (it.hasNext()) {
+//            Element element = it.next();
+//            String href = element.attr("href");
+//            if (StringUtils.isEmpty(href) || href.equals("null") || href.equals("#") || href.startsWith("javascript:") || href.equals("/")) {
+//                continue;
+//            }
+//            String site = null;
+//            if (href.startsWith("http")) {
+//                site = href;
+//            } else {
+//                site = domain  + href;
+//            }
+//            System.out.println("====>"+site);
+//            urls.add(site);
+//        }
+//        return urls;
+//
+//    }
 
 
     public static Set<String> fetchFromContent(String content, String regex) {

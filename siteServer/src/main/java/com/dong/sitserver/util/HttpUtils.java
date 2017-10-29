@@ -90,4 +90,12 @@ public class HttpUtils {
     }
 
 
+    public static String getDomain(String url) {
+        url = url+"/";
+       int in =  url.indexOf("/",10);
+
+        return url.substring(0, in);
+    }
+
+
 }

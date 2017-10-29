@@ -52,15 +52,17 @@ public class FileUtil {
         if (StringTools.isEmptyOrNone(content)) {
             return true;
         }
+        content = content+"\r\n";
         File file = getFile(path);
 
         FileOutputStream fos = null;
 
         try {
-            fos = new FileOutputStream(file, isAppend);
+
             if (!file.exists()) {
                 file.createNewFile();
             }
+            fos = new FileOutputStream(file, isAppend);
             byte[] con = content.getBytes();
             fos.write(con);
         } catch (FileNotFoundException e1) {
